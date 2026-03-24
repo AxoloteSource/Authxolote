@@ -25,10 +25,15 @@ Sigue estos pasos para poner en marcha el proyecto:
    ```
 
 3. **Configurar el entorno:**
-   Copia el archivo de ejemplo y configura tus credenciales de base de datos.
+   Copia el archivo de ejemplo y configura tus credenciales de base de datos y la información del usuario root.
    ```bash
    cp .env.example .env
    ```
+   En tu archivo `.env`, asegúrate de establecer las siguientes variables para el seeder inicial:
+   - `ROOT_USER_NAME`: El nombre del usuario root.
+   - `ROOT_USER_EMAIL`: El correo electrónico del usuario root.
+   - `ROOT_USER_PASSWORD`: La contraseña para el usuario root.
+
    Genera la clave de la aplicación:
    ```bash
    php artisan key:generate
@@ -43,7 +48,7 @@ Sigue estos pasos para poner en marcha el proyecto:
 5. **Instalar Laravel Passport:**
    Genera las claves de cifrado necesarias para los tokens de acceso personal y clientes.
    ```bash
-   php artisan passport:install
+   php artisan passport:client --personal --name="Laravel Personal Access Client"
    ```
 
 6. **Iniciar el servidor:**
