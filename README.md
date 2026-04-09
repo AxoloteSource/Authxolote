@@ -78,24 +78,24 @@ All APIs are located under the `/api` prefix.
 
 ### 🔐 Authentication (`routes/modules/auth.php`)
 
-| Method | Endpoint | Description | Requires Auth |
-|---|---|---|---|
-| POST | `/login` | Logs in and returns a Passport token. | No |
-| POST | `/register` | Registers a new user. | No |
-| POST | `/logout` | Revokes the current access token. | Yes |
-| POST | `/me` | Gets the authenticated user's information. | Yes |
-| POST | `/is-allowed` | Checks if the user has a specific permission. | Yes |
+| Method | Endpoint | Description | Parameters | Response | Requires Auth |
+|---|---|---|---|---|---|
+| POST | `/login` | Logs in and returns a Passport token. | `email`, `password` | User data + `access_token` | No |
+| POST | `/register` | Registers a new user. | `name`, `email`, `password`, `password_confirmation`, `role_key` | User data | No |
+| POST | `/logout` | Revokes the current access token. | None | `{"message": "Logged out"}` | Yes |
+| POST | `/me` | Gets the authenticated user's information. | None | User data + `role` | Yes |
+| POST | `/is-allowed` | Checks if the user has specific permissions. | `actions` (array) | `{"allowed": bool}` | Yes |
 
 ### 👥 Role Management (`routes/modules/roles.php`)
 
 Requires authentication via Bearer Token.
 
-| Method | Endpoint | Description | Required Permission |
-|---|---|---|---|
-| GET | `/roles` | Lists all roles. | `auth.role.index` |
-| POST | `/roles/attach/actions` | Assigns actions/permissions to a role. | `auth.role.attach.actions` |
-| GET | `/roles/{id}/actions` | Lists actions associated with a role. | `auth.role.actions.index` |
-| PUT | `/roles/{id}/actions/{actionId}` | Updates a specific action for a role. | `auth.role.actions.update` |
+| Method | Endpoint | Description | Parameters | Required Permission |
+|---|---|---|---|---|
+| GET | `/roles` | Lists all roles. | `page`, `limit`, `order`, `search`, `filters` | `auth.role.index` |
+| POST | `/roles/attach/actions` | Assigns actions/permissions to roles. | `roles` (array of `{id: role_id, actions: [ids]}`) | `auth.role.attach.actions` |
+| GET | `/roles/{id}/actions` | Lists actions associated with a role. | `id` (path), `page`, `limit`, `order`, `search` | `auth.role.actions.index` |
+| PUT | `/roles/{id}/actions/{actionId}` | Updates a specific action for a role. | `id` (path), `actionId` (path), `active` (bool) | `auth.role.actions.update` |
 
 ### 🌊 Flow API (`routes/modules/flow.php`)
 
@@ -103,13 +103,13 @@ Flow is a dynamic system that allows performing CRUD operations on registered mo
 
 **Currently supported models:** `actions` (more can be added in `FlowIndexLogic.php`).
 
-| Method | Endpoint | Description | Required Permission |
-|---|---|---|---|
-| GET | `/{model}` | Lists model records with search and pagination support. | `auth.flow.index` |
-| POST | `/{model}` | Creates a new record in the model. | `auth.flow.store` |
-| GET | `/{model}/{id}` | Gets a specific record by ID. | `auth.flow.show` |
-| PUT | `/{model}/{id}` | Updates an existing record. | `auth.flow.update` |
-| DELETE | `/{model}/{id}` | Deletes a record (supports SoftDelete). | `auth.flow.delete` |
+| Method | Endpoint | Description | Parameters | Required Permission |
+|---|---|---|---|---|
+| GET | `/{model}` | Lists model records with search and pagination support. | `page`, `limit`, `order`, `search`, `filters` | `auth.flow.index` |
+| POST | `/{model}` | Creates a new record in the model. | Model-specific fields | `auth.flow.store` |
+| GET | `/{model}/{id}` | Gets a specific record by ID. | `id` (path) | `auth.flow.show` |
+| PUT | `/{model}/{id}` | Updates an existing record. | `id` (path) + Fields to update | `auth.flow.update` |
+| DELETE | `/{model}/{id}` | Deletes a record (supports SoftDelete). | `id` (path) | `auth.flow.delete` |
 
 ---
 
