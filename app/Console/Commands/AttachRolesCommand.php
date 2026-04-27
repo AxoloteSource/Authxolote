@@ -2,7 +2,6 @@
 
 namespace App\Console\Commands;
 
-use App\Core\Contracts\AttachRolesInterface;
 use App\Data\Role\StoreRoleActionData;
 use App\Logics\Roles\RoleActionStoreLogic;
 use Illuminate\Console\Command;

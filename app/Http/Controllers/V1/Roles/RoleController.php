@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers\V1\Roles;
 
-use App\Core\Data\IndexData;
+use AxoloteSource\Logics\Data\IndexData;
 use App\Http\Controllers\Controller;
 use App\Logics\Roles\RoleIndexLogic;
 use Illuminate\Http\JsonResponse;

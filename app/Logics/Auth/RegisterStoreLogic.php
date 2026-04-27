@@ -2,7 +2,7 @@
 
 namespace App\Logics\Auth;
 
-use App\Core\Logics\StoreLogic;
+use AxoloteSource\Logics\Logics\StoreLogic;
 use App\Data\Auth\RegisterData;
 use App\Http\Resources\Auth\LoginResource;
 use App\Models\User;

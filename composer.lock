@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "6d94b61aa440b3f998c423787a3bb89c",
+    "content-hash": "ef71133354495991c1ab7c1f5f0a0aa7",
     "packages": [
         {
             "name": "amphp/amp",
@@ -813,6 +813,61 @@
                 }
             ],
             "time": "2024-08-03T19:31:26+00:00"
+        },
+        {
+            "name": "axolote-source/laravel-logics",
+            "version": "dev-main",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/AxoloteSource/laravel-logics.git",
+                "reference": "388cb4148e978474e618c6671d585b622e9b059e"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/AxoloteSource/laravel-logics/zipball/388cb4148e978474e618c6671d585b622e9b059e",
+                "reference": "388cb4148e978474e618c6671d585b622e9b059e",
+                "shasum": ""
+            },
+            "require": {
+                "illuminate/database": "^10.0 || ^11.0 || ^12.0 || ^13.0",
+                "illuminate/http": "^10.0 || ^11.0 || ^12.0 || ^13.0",
+                "illuminate/support": "^10.0 || ^11.0 || ^12.0 || ^13.0",
+                "php": "^8.2",
+                "spatie/laravel-data": "^3.0 || ^4.0"
+            },
+            "require-dev": {
+                "mockery/mockery": "^1.6",
+                "phpunit/phpunit": "^10.0 || ^11.0"
+            },
+            "default-branch": true,
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "AxoloteSource\\Logics\\LogicsServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "AxoloteSource\\Logics\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Luis Ozuna"
+                }
+            ],
+            "description": "Logics library for Laravel projects",
+            "support": {
+                "issues": "https://github.com/AxoloteSource/laravel-logics/issues",
+                "source": "https://github.com/AxoloteSource/laravel-logics/tree/main"
+            },
+            "time": "2026-04-27T08:08:42+00:00"
         },
         {
             "name": "brick/math",
@@ -10760,8 +10815,10 @@
         }
     ],
     "aliases": [],
-    "minimum-stability": "stable",
-    "stability-flags": {},
+    "minimum-stability": "dev",
+    "stability-flags": {
+        "axolote-source/laravel-logics": 20
+    },
     "prefer-stable": true,
     "prefer-lowest": false,
     "platform": {

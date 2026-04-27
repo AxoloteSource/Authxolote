@@ -2,7 +2,7 @@
 
 namespace Tests;
 
-use App\Core\ErrorContainer;
+use AxoloteSource\Logics\ErrorContainer;
 use App\Enums\RoleEnum;
 use App\Models\User;
 use Illuminate\Foundation\Testing\DatabaseTransactions;

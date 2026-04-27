@@ -2,7 +2,7 @@
 
 namespace App\Providers;
 
-use App\Core\Responses\ResponseMacros;
+use AxoloteSource\Logics\Responses\ResponseMacros;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider

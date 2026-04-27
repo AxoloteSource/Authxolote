@@ -2,9 +2,9 @@
 
 namespace App\Logics\Actions;
 
-use App\Core\Classes\Filter;
-use App\Core\Data\IndexData;
-use App\Core\Logics\IndexLogic;
+use AxoloteSource\Logics\Classes\Filter;
+use AxoloteSource\Logics\Data\IndexData;
+use AxoloteSource\Logics\Logics\IndexLogic;
 use App\Http\Resources\Actions\RoleActionResource;
 use App\Models\Action;
 use Illuminate\Database\Eloquent\Builder;
@@ -38,7 +38,7 @@ class ActionRoleIndexLogic extends IndexLogic
         return RoleActionResource::collection($this->response);
     }
 
-    function searchActive(Filter $filter)
+    function searchActive(Filter $filter): void
     {
         $this->queryBuilder->having('active', '=', filter_var($filter->value, FILTER_VALIDATE_BOOLEAN));
     }

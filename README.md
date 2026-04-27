@@ -68,7 +68,7 @@ Follow these steps to get the project up and running:
 - **SettingValueType**: Defines value types for configurations.
 
 ### `IsAllow` Middleware
-The system uses a custom middleware (`App\Core\Middleware\IsAllow`) to verify if the authenticated user has the necessary permission (`Action`) to execute a specific route.
+The system uses a custom middleware (`AxoloteSource\Logics\Middleware\IsAllow`) to verify if the authenticated user has the necessary permission (`Action`) to execute a specific route.
 
 ---
 

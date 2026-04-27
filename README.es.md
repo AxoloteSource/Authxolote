@@ -68,7 +68,7 @@ Sigue estos pasos para poner en marcha el proyecto:
 - **SettingValueType**: Define los tipos de valores para las configuraciones.
 
 ### Middleware `IsAllow`
-El sistema utiliza un middleware personalizado (`App\Core\Middleware\IsAllow`) para verificar si el usuario autenticado tiene el permiso (`Action`) necesario para ejecutar una ruta específica.
+El sistema utiliza un middleware personalizado (`AxoloteSource\Logics\Middleware\IsAllow`) para verificar si el usuario autenticado tiene el permiso (`Action`) necesario para ejecutar una ruta específica.
 
 ---
 
