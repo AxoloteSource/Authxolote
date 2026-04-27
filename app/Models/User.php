@@ -68,4 +68,9 @@ class User extends Authenticatable
             }
         }
     }
+
+    public function scopeSearchByEmail($query, $email): void
+    {
+        $query->where('email', $email);
+    }
 }
