@@ -14,6 +14,7 @@ class DatabaseSeeder extends Seeder
             UserSeeder::class,
             ActionRoleSeeder::class,
             SettingValueTypeSeeder::class,
+            SettingSeeder::class,
         ]);
     }
 }
