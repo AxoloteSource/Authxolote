@@ -41,8 +41,31 @@ class SettingSeeder extends Seeder
                 'setting_value_type_id' => SettingValueTypeEnum::Boolean->value,
                 'group' => 'auth',
             ],
+            [
+                'name' => 'otp_length',
+                'value' => '4',
+                'setting_value_type_id' => SettingValueTypeEnum::Integer->value,
+                'group' => 'auth',
+            ],
+            [
+                'name' => 'otp_expires_in_minutes',
+                'value' => '15',
+                'setting_value_type_id' => SettingValueTypeEnum::Integer->value,
+                'group' => 'auth',
+            ],
+            [
+                'name' => 'otp_max_attempts',
+                'value' => '3',
+                'setting_value_type_id' => SettingValueTypeEnum::Integer->value,
+                'group' => 'auth',
+            ],
+            [
+                'name' => 'otp_retry_after_seconds',
+                'value' => '60',
+                'setting_value_type_id' => SettingValueTypeEnum::Integer->value,
+                'group' => 'auth',
+            ],
         ];
-
         Setting::upsert($settings, ['name'], ['value', 'setting_value_type_id', 'group']);
     }
 }
