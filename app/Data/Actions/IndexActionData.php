@@ -2,7 +2,7 @@
 
 namespace App\Data\Actions;
 
-use App\Core\Data\IndexData;
+use AxoloteSource\Logics\Data\IndexData;
 use Spatie\LaravelData\Attributes\FromRouteParameter;
 use Spatie\LaravelData\Attributes\Validation\Rule;
 

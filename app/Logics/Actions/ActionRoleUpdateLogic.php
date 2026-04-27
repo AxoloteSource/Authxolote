@@ -2,7 +2,7 @@
 
 namespace App\Logics\Actions;
 
-use App\Core\Logics\UpdateLogic;
+use AxoloteSource\Logics\Logics\UpdateLogic;
 use App\Data\ActionRole\UpdateActionRoleData;
 use App\Models\Action;
 use Illuminate\Database\Eloquent\Model;

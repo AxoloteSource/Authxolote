@@ -2,9 +2,9 @@
 
 namespace App\Logics\Roles;
 
-use App\Core\Enums\Http;
-use App\Core\Logics\Logic;
-use App\Core\Traits\OnlyWithAction;
+use AxoloteSource\Logics\Enums\Http;
+use AxoloteSource\Logics\Logics\Logic;
+use AxoloteSource\Logics\Traits\OnlyWithAction;
 use App\Data\Role\StoreRoleActionData;
 use App\Models\Action;
 use App\Models\Role;
@@ -31,8 +31,14 @@ class RoleActionStoreLogic extends Logic
                 ['name' => ucfirst($roleKey)]
             );
 
-            $actionIds = collect($actions)->map(function ($actionName) {
-                return Action::firstOrCreate(['name' => $actionName])->id;
+            $actionIds = collect($actions)->map(function ($value, $key) {
+                $name = is_string($key) ? $key : $value;
+                $description = is_string($key) ? $value : null;
+
+                return Action::updateOrCreate(
+                    ['name' => $name],
+                    ['description' => $description]
+                )->id;
             });
 
             $role->actions()->sync($actionIds);

@@ -2,9 +2,9 @@
 
 namespace App\Logics\Auth;
 
-use App\Core\Data\EmptyData;
-use App\Core\Logics\Logic;
-use App\Core\Traits\OnlyWithAction;
+use AxoloteSource\Logics\Data\EmptyData;
+use AxoloteSource\Logics\Logics\Logic;
+use AxoloteSource\Logics\Traits\OnlyWithAction;
 use App\Http\Resources\Auth\MeResource;
 use Illuminate\Http\JsonResponse;
 

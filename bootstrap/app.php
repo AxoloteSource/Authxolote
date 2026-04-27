@@ -1,9 +1,9 @@
 <?php
 
 use App\Console\Commands\AttachRolesCommand;
-use App\Core\Middleware\IsAllow;
-use App\Core\Middleware\SetHeaders;
-use App\Core\Middleware\TransactionMiddleware;
+use App\Http\Middleware\IsAllow;
+use AxoloteSource\Logics\Middleware\SetHeaders;
+use AxoloteSource\Logics\Middleware\TransactionMiddleware;
 use Illuminate\Foundation\Application;
 use Illuminate\Foundation\Configuration\Exceptions;
 use Illuminate\Foundation\Configuration\Middleware;

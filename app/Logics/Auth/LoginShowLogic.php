@@ -2,7 +2,7 @@
 
 namespace App\Logics\Auth;
 
-use App\Core\Logics\ShowLogic;
+use AxoloteSource\Logics\Logics\ShowLogic;
 use App\Data\Auth\LoginData;
 use App\Http\Resources\Auth\LoginResource;
 use App\Models\User;
@@ -39,7 +39,7 @@ class LoginShowLogic extends ShowLogic
 
     protected function makeQuery(): Builder
     {
-        return User::where('email', $this->input->email);
+        return User::searchByEmail($this->input->email);
     }
 
     protected function withResource(): array|Model|JsonResource

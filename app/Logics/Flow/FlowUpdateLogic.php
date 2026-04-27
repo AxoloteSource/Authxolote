@@ -2,7 +2,7 @@
 
 namespace App\Logics\Flow;
 
-use App\Core\Logics\Flow\FlowUpdateLogicBase;
+use AxoloteSource\Logics\Logics\Flow\FlowUpdateLogicBase;
 use App\Data\Actions\UpdateActionData;
 use App\Data\Role\UpdateRoleData;
 use App\Models\Action;

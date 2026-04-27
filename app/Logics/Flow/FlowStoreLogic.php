@@ -2,7 +2,7 @@
 
 namespace App\Logics\Flow;
 
-use App\Core\Logics\Flow\FlowStoreLogicBase;
+use AxoloteSource\Logics\Logics\Flow\FlowStoreLogicBase;
 use App\Data\Actions\StoreActionData;
 use App\Data\Role\StoreRoleData;
 use App\Models\Action;

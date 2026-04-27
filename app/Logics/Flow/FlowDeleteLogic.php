@@ -2,8 +2,8 @@
 
 namespace App\Logics\Flow;
 
-use App\Core\Data\Flow\FlowByIdData;
-use App\Core\Logics\Flow\FlowDeleteLogicBase;
+use AxoloteSource\Logics\Data\Flow\FlowByIdData;
+use AxoloteSource\Logics\Logics\Flow\FlowDeleteLogicBase;
 use App\Models\Action;
 use App\Models\Role;
 use Illuminate\Http\JsonResponse;
