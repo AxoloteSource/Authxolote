@@ -30,5 +30,7 @@
     "If you did not receive the email": "Si no has recibido el email",
     "click here to request another": "pulsa aquí para que te enviemos otro",
     "All rights reserved.":  "Todos los derechos reservados.",
-    "You do not have permission to access this resource": "No tienes permiso para acceder a este recurso"
+    "You do not have permission to access this resource": "No tienes permiso para acceder a este recurso",
+    "Please wait :seconds seconds before requesting a new OTP.": "Por favor espere :seconds segundos antes de solicitar un nuevo OTP.",
+    "Too many OTP requests. Please try again later.": "Demasiadas solicitudes de OTP. Por favor, inténtelo de nuevo más tarde."
 }
