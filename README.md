@@ -74,7 +74,7 @@ The system uses a custom middleware (`AxoloteSource\Logics\Middleware\IsAllow`) 
 
 ## 📡 API Documentation
 
-All APIs are located under the `/api` prefix.
+All APIs are located under the `/api/v1` prefix.
 
 ### 🔐 Authentication (`routes/modules/auth.php`)
 
@@ -85,6 +85,10 @@ All APIs are located under the `/api` prefix.
 | POST | `/logout` | Revokes the current access token. | None | `{"message": "Logged out"}` | Yes |
 | POST | `/me` | Gets the authenticated user's information. | None | User data + `role` | Yes |
 | POST | `/is-allowed` | Checks if the user has specific permissions. | `actions` (array) | `{"allowed": bool}` | Yes |
+| POST | `/recovery-password` | Initiates password recovery. | None | `token`, `expires_at`, `code_debug`* | Yes |
+| POST | `/reset-password` | Resets password using OTP. | `token`, `otp_code`, `password`, `password_confirmation` | Success message | Yes |
+
+\* `code_debug` is only returned if `APP_ENV` is not `production`.
 
 ### 👥 Role Management (`routes/modules/roles.php`)
 

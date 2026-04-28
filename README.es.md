@@ -74,7 +74,7 @@ El sistema utiliza un middleware personalizado (`AxoloteSource\Logics\Middleware
 
 ## 📡 Documentación de APIs
 
-Todas las APIs se encuentran bajo el prefijo `/api`.
+Todas las APIs se encuentran bajo el prefijo `/api/v1`.
 
 ### 🔐 Autenticación (`routes/modules/auth.php`)
 
@@ -85,6 +85,10 @@ Todas las APIs se encuentran bajo el prefijo `/api`.
 | POST | `/logout` | Revoca el token de acceso actual. | Ninguno | `{"message": "Logged out"}` | Sí |
 | POST | `/me` | Obtiene la información del usuario autenticado. | Ninguno | Datos del usuario + `role` | Sí |
 | POST | `/is-allowed` | Verifica si el usuario tiene permisos específicos. | `actions` (array) | `{"allowed": bool}` | Sí |
+| POST | `/recovery-password` | Inicia la recuperación de contraseña. | Ninguno | `token`, `expires_at`, `code_debug`* | Sí |
+| POST | `/reset-password` | Restablece la contraseña usando el OTP. | `token`, `otp_code`, `password`, `password_confirmation` | Mensaje de éxito | Sí |
+
+\* `code_debug` solo se devuelve si `APP_ENV` no es `production`.
 
 ### 👥 Gestión de Roles (`routes/modules/roles.php`)
 
