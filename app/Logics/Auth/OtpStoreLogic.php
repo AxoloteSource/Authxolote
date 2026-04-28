@@ -8,6 +8,7 @@ use App\Models\Setting;
 use AxoloteSource\Logics\Logics\StoreLogic;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\JsonResponse;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
 use Spatie\LaravelData\Data;
 
@@ -47,7 +48,9 @@ class OtpStoreLogic extends StoreLogic
 
         $this->input->token = Str::uuid()->toString();
         $this->input->expires_at = now()->addMinutes($this->otpExpiresInMinutes);
-        $this->input->otp_code = $this->generateOtpCode($this->otpLength);
+
+        $code = $this->generateOtpCode($this->otpLength);
+        $this->input->otp_code = Hash::make($code);
 
         return true;
     }

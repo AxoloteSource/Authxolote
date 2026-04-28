@@ -1,0 +1,79 @@
+@authUrl = {{authUrl}}
+@authEmail = {{authEmail}}
+@authPassword = {{authPassword}}
+
+### Auth - Login and save bearer token
+POST {{authUrl}}/api/v1/login
+Accept: application/json
+Content-Type: application/json
+
+{
+  "email": "{{authEmail}}",
+  "password": "{{authPassword}}"
+}
+
+> {%
+    const token = response.body?.data?.access_token;
+
+    if (!token) {
+        client.log("Token not found in response.body.data.token");
+        throw new Error("Login response does not include a token.");
+    }
+
+    client.global.set("token", token);
+    client.log("Bearer token saved to global variable: token");
+%}
+
+### Register User
+# @name register
+POST {{authUrl}}api/v1/register
+Accept: application/json
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+{
+  "email": "user@example.com",
+  "name": "User Name",
+  "password": "{{authPassword}}",
+  "password_confirmation": "{{authPassword}}",
+  "role_key": "Admin"
+}
+
+> {%
+    client.global.set("auth_token", response.body.data.access_token);
+%}
+
+### Get Authenticated User Info (Me)
+# @name me
+POST {{authUrl}}api/v1/me
+Accept: application/json
+Authorization: Bearer {{token}}
+
+### Check Permissions (Actions)
+# @name actions
+POST {{authUrl}}api/v1/is-allowed
+Accept: application/json
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+{
+  "actions": ["user.create", "user.view"]
+}
+
+### Attach Roles Action
+# @name attachRolesAction
+POST {{authUrl}}api/v1/roles/attach/actions
+Accept: application/json
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+[
+  "admin",
+  "editor"
+]
+
+### Recovery Password
+# @name recoveryPassword
+POST {{authUrl}}api/v1/recovery-password
+Accept: application/json
+Authorization: Bearer {{token}}
