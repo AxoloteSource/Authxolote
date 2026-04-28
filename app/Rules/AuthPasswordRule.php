@@ -16,11 +16,11 @@ class AuthPasswordRule implements ValidationRule
      */
     public function validate(string $attribute, mixed $value, Closure $fail): void
     {
-        $min = Setting::where('name', 'password_min_length')->first()?->value ?? 8;
-        $letters = filter_var(Setting::where('name', 'password_require_letters')->first()?->value ?? true, FILTER_VALIDATE_BOOLEAN);
-        $numbers = filter_var(Setting::where('name', 'password_require_numbers')->first()?->value ?? true, FILTER_VALIDATE_BOOLEAN);
-        $symbols = filter_var(Setting::where('name', 'password_require_symbols')->first()?->value ?? false, FILTER_VALIDATE_BOOLEAN);
-        $mixedCase = filter_var(Setting::where('name', 'password_require_mixed_case')->first()?->value ?? false, FILTER_VALIDATE_BOOLEAN);
+        $min = Setting::getPasswordMinLength();
+        $letters = Setting::getPasswordRequireLetters();
+        $numbers = Setting::getPasswordRequireNumbers();
+        $symbols = Setting::getPasswordRequireSymbols();
+        $mixedCase = Setting::getPasswordRequireMixedCase();
 
         $passwordRule = Password::min($min);
 

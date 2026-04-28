@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Str;
 
 class Otp extends Model
 {
@@ -48,5 +49,10 @@ class Otp extends Model
             ->whereNull('used_at')
             ->where('expires_at', '>', now())
             ->update(['expires_at' => now()]);
+    }
+
+    public static function generateToken(): string
+    {
+        return Str::uuid()->toString();
     }
 }

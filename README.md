@@ -79,14 +79,15 @@ All APIs are located under the `/api/v1` prefix.
 ### 🔐 Authentication (`routes/modules/auth.php`)
 
 | Method | Endpoint | Description | Parameters | Response | Requires Auth |
-|---|---|---|---|---|---|
-| POST | `/login` | Logs in and returns a Passport token. | `email`, `password` | User data + `access_token` | No |
-| POST | `/register` | Registers a new user. | `name`, `email`, `password`, `password_confirmation`, `role_key` | User data | No |
-| POST | `/logout` | Revokes the current access token. | None | `{"message": "Logged out"}` | Yes |
-| POST | `/me` | Gets the authenticated user's information. | None | User data + `role` | Yes |
-| POST | `/is-allowed` | Checks if the user has specific permissions. | `actions` (array) | `{"allowed": bool}` | Yes |
-| POST | `/recovery-password` | Initiates password recovery. | None | `token`, `expires_at`, `code_debug`* | Yes |
-| POST | `/reset-password` | Resets password using OTP. | `token`, `otp_code`, `password`, `password_confirmation` | Success message | Yes |
+|---|---|---|---|---|---------------|
+| POST | `/login` | Logs in and returns a Passport token. | `email`, `password` | User data + `access_token` | No            |
+| POST | `/register` | Registers a new user. | `name`, `email`, `password`, `password_confirmation`, `role_key` | User data | No            |
+| POST | `/logout` | Revokes the current access token. | None | `{"message": "Logged out"}` | Yes           |
+| POST | `/me` | Gets the authenticated user's information. | None | User data + `role` | Yes           |
+| POST | `/is-allowed` | Checks if the user has specific permissions. | `actions` (array) | `{"allowed": bool}` | Yes           |
+| POST | `/recovery-password` | Initiates password recovery. | `email` | `token`, `expires_at`, `code_debug`* | No            |
+| POST | `/change-password` | Initiates password change. | None | `token`, `expires_at`, `code_debug`* | Yes           |
+| POST | `/reset-password` | Resets password using OTP. | `token`, `otp_code`, `password`, `password_confirmation` | Success message | No            |
 
 \* `code_debug` is only returned if `APP_ENV` is not `production`.
 

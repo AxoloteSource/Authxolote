@@ -9,7 +9,6 @@ use AxoloteSource\Logics\Logics\StoreLogic;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Str;
 use Spatie\LaravelData\Data;
 
 class OtpStoreLogic extends StoreLogic
@@ -46,7 +45,7 @@ class OtpStoreLogic extends StoreLogic
             return false;
         }
 
-        $this->input->token = Str::uuid()->toString();
+        $this->input->token = Otp::generateToken();
         $this->input->expires_at = now()->addMinutes($this->otpExpiresInMinutes);
 
         $code = $this->generateOtpCode($this->otpLength);
@@ -57,10 +56,10 @@ class OtpStoreLogic extends StoreLogic
 
     protected function initializer(): void
     {
-        $this->otpLength = (int) (Setting::where('name', 'otp_length')->value('value') ?? 6);
-        $this->otpExpiresInMinutes = (int) (Setting::where('name', 'otp_expires_in_minutes')->value('value') ?? 15);
-        $this->otpMaxAttempts = (int) (Setting::where('name', 'otp_max_attempts')->value('value') ?? 3);
-        $this->otpRetryAfterSeconds = (int) (Setting::where('name', 'otp_retry_after_seconds')->value('value') ?? 60);
+        $this->otpLength = Setting::getOtpLength();
+        $this->otpExpiresInMinutes = Setting::getOtpExpiresInMinutes();
+        $this->otpMaxAttempts = Setting::getOtpMaxAttempts();
+        $this->otpRetryAfterSeconds = Setting::getOtpRetryAfterSeconds();
         $this->lastOtp = Otp::where('user_id', $this->input->user_id)
             ->latest()
             ->first();

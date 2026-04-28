@@ -79,14 +79,15 @@ Todas las APIs se encuentran bajo el prefijo `/api/v1`.
 ### 🔐 Autenticación (`routes/modules/auth.php`)
 
 | Método | Endpoint | Descripción | Parámetros | Respuesta | Requiere Auth |
-|---|---|---|---|---|---|
-| POST | `/login` | Inicia sesión y devuelve un token de Passport. | `email`, `password` | Datos del usuario + `access_token` | No |
-| POST | `/register` | Registra un nuevo usuario. | `name`, `email`, `password`, `password_confirmation`, `role_key` | Datos del usuario | No |
-| POST | `/logout` | Revoca el token de acceso actual. | Ninguno | `{"message": "Logged out"}` | Sí |
-| POST | `/me` | Obtiene la información del usuario autenticado. | Ninguno | Datos del usuario + `role` | Sí |
-| POST | `/is-allowed` | Verifica si el usuario tiene permisos específicos. | `actions` (array) | `{"allowed": bool}` | Sí |
-| POST | `/recovery-password` | Inicia la recuperación de contraseña. | Ninguno | `token`, `expires_at`, `code_debug`* | Sí |
-| POST | `/reset-password` | Restablece la contraseña usando el OTP. | `token`, `otp_code`, `password`, `password_confirmation` | Mensaje de éxito | Sí |
+|---|---|---|---|---|---------------|
+| POST | `/login` | Inicia sesión y devuelve un token de Passport. | `email`, `password` | Datos del usuario + `access_token` | No            |
+| POST | `/register` | Registra un nuevo usuario. | `name`, `email`, `password`, `password_confirmation`, `role_key` | Datos del usuario | No            |
+| POST | `/logout` | Revoca el token de acceso actual. | Ninguno | `{"message": "Logged out"}` | Sí            |
+| POST | `/me` | Obtiene la información del usuario autenticado. | Ninguno | Datos del usuario + `role` | Sí            |
+| POST | `/is-allowed` | Verifica si el usuario tiene permisos específicos. | `actions` (array) | `{"allowed": bool}` | Sí            |
+| POST | `/recovery-password` | Inicia la recuperación de contraseña. | `email` | `token`, `expires_at`, `code_debug`* | No            |
+| POST | `/change-password` | Inicia el cambio de contraseña. | Ninguno | `token`, `expires_at`, `code_debug`* | Sí            |
+| POST | `/reset-password` | Restablece la contraseña usando el OTP. | `token`, `otp_code`, `password`, `password_confirmation` | Mensaje de éxito | No            |
 
 \* `code_debug` solo se devuelve si `APP_ENV` no es `production`.
 

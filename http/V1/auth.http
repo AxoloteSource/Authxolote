@@ -72,8 +72,18 @@ Authorization: Bearer {{token}}
   "editor"
 ]
 
+### Change Password
+# @name changePassword
+POST {{authUrl}}api/v1/change-password
+Accept: application/json
+Authorization: Bearer {{token}}
+
 ### Recovery Password
 # @name recoveryPassword
 POST {{authUrl}}api/v1/recovery-password
 Accept: application/json
-Authorization: Bearer {{token}}
+Content-Type: application/json
+
+{
+  "email": "user@example.com"
+}
