@@ -3,12 +3,14 @@
 namespace Tests\Feature\Auth;
 
 use App\Enums\RoleEnum;
+use App\Models\User;
 use Tests\TestCase;
 
 class RegisterStoreLogicTest extends TestCase
 {
     public function test_can_register(): void
     {
+        $user = User::factory()->create(['role_id' => RoleEnum::Root->value]);
         $faker = $this->faker;
         $name = $faker->firstName;
         $email = $faker->unique()->safeEmail;
@@ -22,7 +24,7 @@ class RegisterStoreLogicTest extends TestCase
             'role_key' => 'admin',
         ];
 
-        $response = $this->postJson('api/v1/register', $payload);
+        $response = $this->actingAs($user, 'api')->postJson('api/v1/register', $payload);
 
         $response->assertStatus(201);
 
