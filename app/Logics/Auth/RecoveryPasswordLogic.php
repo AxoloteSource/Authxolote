@@ -4,6 +4,7 @@ namespace App\Logics\Auth;
 
 use App\Data\Auth\OtpStoreData;
 use App\Data\Auth\RecoveryPasswordData;
+use App\Http\Resources\Auth\RecoveryPasswordResource;
 use AxoloteSource\Logics\Enums\Http;
 use AxoloteSource\Logics\Logics\Logic;
 use AxoloteSource\Logics\Traits\OnlyWithAction;
@@ -56,5 +57,10 @@ class RecoveryPasswordLogic extends Logic
             data: $this->withResource(),
             status: Http::Created
         );
+    }
+
+    protected function withResource(): RecoveryPasswordResource
+    {
+        return new RecoveryPasswordResource($this->response);
     }
 }
