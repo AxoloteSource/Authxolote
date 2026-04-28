@@ -39,4 +39,14 @@ class Otp extends Model
     {
         return $this->belongsTo(User::class);
     }
+
+    public function expiredOtherActiveOtps(): void
+    {
+        $this->newQuery()
+            ->where('user_id', $this->user_id)
+            ->where('id', '!=', $this->id)
+            ->whereNull('used_at')
+            ->where('expires_at', '>', now())
+            ->update(['expires_at' => now()]);
+    }
 }

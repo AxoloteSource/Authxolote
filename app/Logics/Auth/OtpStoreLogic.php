@@ -85,6 +85,13 @@ class OtpStoreLogic extends StoreLogic
         return true;
     }
 
+    protected function after(): bool
+    {
+        $this->model->expiredOtherActiveOtps();
+
+        return true;
+    }
+
     private function generateOtpCode(int $length): string
     {
         $characters = '0123456789';

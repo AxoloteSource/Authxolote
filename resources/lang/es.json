@@ -32,5 +32,10 @@
     "All rights reserved.":  "Todos los derechos reservados.",
     "You do not have permission to access this resource": "No tienes permiso para acceder a este recurso",
     "Please wait :seconds seconds before requesting a new OTP.": "Por favor espere :seconds segundos antes de solicitar un nuevo OTP.",
-    "Too many OTP requests. Please try again later.": "Demasiadas solicitudes de OTP. Por favor, inténtelo de nuevo más tarde."
+    "Too many OTP requests. Please try again later.": "Demasiadas solicitudes de OTP. Por favor, inténtelo de nuevo más tarde.",
+    "Invalid token.": "Token inválido.",
+    "This OTP has already been used.": "Este OTP ya ha sido utilizado.",
+    "This OTP has expired.": "Este OTP ha expirado.",
+    "Invalid OTP code": "Código OTP inválido",
+    "Password reset successfully.": "Contraseña restablecida correctamente."
 }

@@ -41,14 +41,20 @@ class OtpStoreLogicTest extends TestCase
     public function test_only_one_valid_otp_allowed()
     {
         $user = User::factory()->create();
+        Setting::where('name', 'otp_retry_after_seconds')->update(['value' => '0']);
 
         // Primer OTP
         app(OtpStoreLogic::class)->run(new OtpStoreData($user->id));
         $this->assertEquals(1, Otp::where('user_id', $user->id)->count());
+        $firstOtp = Otp::where('user_id', $user->id)->first();
+        $this->assertTrue($firstOtp->expires_at->isFuture());
 
-        // Segundo OTP
+        // Segundo OTP (debería expirar el primero)
         app(OtpStoreLogic::class)->run(new OtpStoreData($user->id));
-        $this->assertEquals(1, Otp::where('user_id', $user->id)->count());
+        $this->assertEquals(2, Otp::where('user_id', $user->id)->count());
+
+        $firstOtp->refresh();
+        $this->assertFalse($firstOtp->expires_at->isFuture());
 
         $activeOtps = Otp::where('user_id', $user->id)
             ->whereNull('used_at')

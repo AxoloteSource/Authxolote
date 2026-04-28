@@ -4,6 +4,7 @@ namespace App\Http\Controllers\V1\Auth;
 
 use App\Data\Auth\IsAllowedData;
 use App\Data\Auth\LoginData;
+use App\Data\Auth\OtpResetPasswordData;
 use App\Data\Auth\RecoveryPasswordData;
 use App\Data\Auth\RegisterData;
 use App\Http\Controllers\Controller;
@@ -11,6 +12,7 @@ use App\Logics\Auth\IsAllowedLogic;
 use App\Logics\Auth\LoginShowLogic;
 use App\Logics\Auth\LogoutLogic;
 use App\Logics\Auth\MeLogic;
+use App\Logics\Auth\OtpResetPasswordLogic;
 use App\Logics\Auth\RecoveryPasswordLogic;
 use App\Logics\Auth\RegisterStoreLogic;
 use Illuminate\Http\JsonResponse;
@@ -43,6 +45,11 @@ class AuthController extends Controller
     }
 
     public function recoveryPassword(RecoveryPasswordData $data, RecoveryPasswordLogic $logic): JsonResponse
+    {
+        return $logic->run($data);
+    }
+
+    public function resetPassword(OtpResetPasswordData $data, OtpResetPasswordLogic $logic): JsonResponse
     {
         return $logic->run($data);
     }

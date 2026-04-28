@@ -56,4 +56,36 @@ class RecoveryPasswordTest extends TestCase
 
         $response->assertStatus(403);
     }
+
+    public function test_code_debug_is_not_present_in_production()
+    {
+        config(['app.env' => 'production']);
+
+        $user = User::factory()->create();
+        $user->attachAction('auth.recovery-password');
+
+        $response = $this->actingAs($user, 'api')
+            ->postJson('/api/v1/recovery-password');
+
+        $response->assertStatus(201)
+            ->assertJsonMissing(['data' => ['code_debug']]);
+    }
+
+    public function test_code_debug_is_present_in_local()
+    {
+        config(['app.env' => 'local']);
+
+        $user = User::factory()->create();
+        $user->attachAction('auth.recovery-password');
+
+        $response = $this->actingAs($user, 'api')
+            ->postJson('/api/v1/recovery-password');
+
+        $response->assertStatus(201)
+            ->assertJsonStructure([
+                'data' => [
+                    'code_debug',
+                ],
+            ]);
+    }
 }

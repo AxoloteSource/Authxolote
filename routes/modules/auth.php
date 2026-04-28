@@ -13,4 +13,5 @@ Route::controller(AuthController::class)->middleware('auth:api')->group(function
     Route::post('is-allowed', 'isAllowed');
     Route::post('me', 'me');
     Route::post('recovery-password', 'recoveryPassword')->middleware('isAllow:auth.recovery-password');
+    Route::post('reset-password', 'resetPassword')->middleware('isAllow:auth.reset-password');
 });
