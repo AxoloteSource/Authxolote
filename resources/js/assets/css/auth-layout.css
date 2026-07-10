@@ -1,0 +1,14 @@
+.auth-layout-container {
+  position: relative;
+  min-height: 100vh;
+  background-size: cover;
+  background-position: left center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-image: url('../images/PATRON_VERTICAL_A.svg');
+}
+
+body.dark .auth-layout-container {
+  background-image: url('../images/PATRON_VERTICAL_B.svg');
+  background-color: var(--background);
+}

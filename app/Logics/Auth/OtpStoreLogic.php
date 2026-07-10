@@ -39,7 +39,7 @@ class OtpStoreLogic extends StoreLogic
 
     protected function before(): bool
     {
-        $this->initializer();
+        $this->init();
 
         if (! $this->validateRateLimit()) {
             return false;
@@ -54,7 +54,7 @@ class OtpStoreLogic extends StoreLogic
         return true;
     }
 
-    protected function initializer(): void
+    protected function init(): void
     {
         $this->otpLength = Setting::getOtpLength();
         $this->otpExpiresInMinutes = Setting::getOtpExpiresInMinutes();

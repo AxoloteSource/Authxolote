@@ -16,6 +16,8 @@ class OtpResetPasswordLogic extends UpdateLogic
 
     public Otp|Model $model;
 
+    protected bool $validateNotFound = false;
+
     public function __construct(Otp $model)
     {
         parent::__construct($model);

@@ -13,6 +13,7 @@ class DatabaseSeeder extends Seeder
             ActionSeeder::class,
             UserSeeder::class,
             ActionRoleSeeder::class,
+            UserListSeeder::class,
             SettingValueTypeSeeder::class,
             SettingSeeder::class,
         ]);
