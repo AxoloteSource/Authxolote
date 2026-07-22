@@ -2,9 +2,9 @@
 
 namespace App\Logics\Flow;
 
+use App\Models\Action;
 use AxoloteSource\Logics\Data\Flow\FlowIndexData;
 use AxoloteSource\Logics\Logics\Flow\FlowIndexLogicBase;
-use App\Models\Action;
 use Illuminate\Http\JsonResponse;
 use Spatie\LaravelData\Data;
 
@@ -45,5 +45,10 @@ class FlowIndexLogic extends FlowIndexLogicBase
             'roles' => 'auth.role.index',
             'actions' => 'auth.action.index',
         ];
+    }
+
+    public function filtersModel(): array
+    {
+        return [];
     }
 }

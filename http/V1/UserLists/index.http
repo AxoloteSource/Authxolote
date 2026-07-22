@@ -1,0 +1,4 @@
+### User Lists - Index
+GET {{authUrl}}api/v1/user-lists
+Accept: application/json
+Authorization: Bearer {{token}}

@@ -1,0 +1,12 @@
+### User Lists - Update
+PUT {{authUrl}}api/v1/user-lists/{{listId}}
+Accept: application/json
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+{
+  "name": "Updated List Name",
+  "slug": "updated-slug",
+  "description": "Updated description of the list",
+  "user_ids": []
+}

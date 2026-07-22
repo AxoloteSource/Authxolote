@@ -1,0 +1,12 @@
+### User Lists - Store
+POST {{authUrl}}api/v1/user-lists
+Accept: application/json
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+{
+  "name": "My New List",
+  "slug": "my-new-list",
+  "description": "Description of the list",
+  "user_ids": []
+}

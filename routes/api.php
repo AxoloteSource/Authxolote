@@ -6,6 +6,8 @@ Route::prefix('/')
     ->group(base_path('/routes/modules/auth.php'));
 
 Route::middleware('auth:api')->group(function () {
+    Route::prefix('users')->group(base_path('routes/modules/user.php'));
     Route::prefix('roles')->group(base_path('routes/modules/roles.php'));
+    Route::prefix('user-lists')->group(base_path('routes/modules/user-lists.php'));
     Route::prefix('')->group(base_path('routes/modules/flow.php'));
 });
