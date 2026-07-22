@@ -9,12 +9,12 @@ globs: app/Logics/**/*IndexLogic.php
 This guide details how to create and use `Logics` within this project's ecosystem, starting with `IndexLogic`. These components encapsulate business logic and are used in controllers via dependency injection.
 
 #### 1. Usage from the Controller
-`Logics` are injected directly into controller methods along with Data Objects. Usually, `IndexData` is used for these logics.
+`Logics` are injected directly into controller methods along with Data Objects.
 
 ```php
 class UserController extends Controller
 {
-    public function index(IndexData $data, UserIndexLogic $logic): JsonResponse
+    public function index(UserIndexData $data, UserIndexLogic $logic): JsonResponse
     {
         // Execute the logic's run method passing the received data
         return $logic->run($data);
@@ -132,8 +132,6 @@ protected function after(): bool
 ```
 
 #### Full Implementation Example
-The `IndexData` object is generally used as the input for these logics to handle pagination, sorting, and searching.
-
 ```php
 class UserIndexLogic extends IndexLogic
 {
@@ -142,7 +140,7 @@ class UserIndexLogic extends IndexLogic
         parent::__construct($model);
     }
 
-    public function run(IndexData $input): JsonResponse
+    public function run(Data $input): JsonResponse
     {
         // The base class logic() method handles the lifecycle
         return $this->logic($input);

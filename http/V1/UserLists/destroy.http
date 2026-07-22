@@ -1,0 +1,4 @@
+### User Lists - Destroy
+DELETE {{authUrl}}api/v1/user-lists/{{listId}}
+Accept: application/json
+Authorization: Bearer {{token}}

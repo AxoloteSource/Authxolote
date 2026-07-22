@@ -4,6 +4,7 @@ namespace App\Logics\UserList;
 
 use App\Data\UserList\UserListUsersData;
 use App\Http\Resources\UserList\UserListUsersResource;
+use App\Models\User;
 use App\Models\UserList;
 use AxoloteSource\Logics\Enums\Http;
 use AxoloteSource\Logics\Logics\IndexLogic;
@@ -43,6 +44,10 @@ class UserListUsersLogic extends IndexLogic
 
     public function makeQuery(): Builder
     {
+        if ($this->list->isAllUsers()) {
+            return User::query();
+        }
+
         return $this->list->users()->getQuery();
     }
 

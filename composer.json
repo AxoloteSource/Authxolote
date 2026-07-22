@@ -17,6 +17,7 @@
         "barryvdh/laravel-ide-helper": "^3.4",
         "fakerphp/faker": "^1.23",
         "laravel/boost": "^1.1",
+        "laravel/pail": "^1.2",
         "laravel/pint": "^1.18",
         "laravel/sail": "^1.26",
         "mockery/mockery": "^1.6",
@@ -36,6 +37,10 @@
         }
     },
     "scripts": {
+        "dev": [
+            "Composer\\Config::disableProcessTimeout",
+            "npx concurrently -c \"#c4b5fd,#fb7185,#fdba74\" \"php artisan queue:listen --tries=1 --timeout=0\" \"php artisan pail --timeout=0\" \"pnpm run dev\" --names=queue,logs,vite --kill-others"
+        ],
         "post-autoload-dump": [
             "Illuminate\\Foundation\\ComposerScripts::postAutoloadDump",
             "@php artisan package:discover --ansi"

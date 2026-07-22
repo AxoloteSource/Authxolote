@@ -1,0 +1,6 @@
+@listId = 019f45b3-2211-721d-a39e-c9c0e0d81908
+
+### User Lists - Users Index
+GET {{authUrl}}api/v1/user-lists/{{listId}}/users
+Accept: application/json
+Authorization: Bearer {{token}}

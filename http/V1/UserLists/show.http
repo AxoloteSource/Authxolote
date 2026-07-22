@@ -1,0 +1,4 @@
+### User Lists - Show
+GET {{authUrl}}api/v1/user-lists/{{listId}}
+Accept: application/json
+Authorization: Bearer {{token}}

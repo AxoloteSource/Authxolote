@@ -55,6 +55,22 @@ class UserListUserIndexTest extends TestCase
         $response->assertStatus(404);
     }
 
+    public function test_it_returns_all_users_when_list_slug_is_all_users(): void
+    {
+        $this->loginRoot();
+
+        $users = User::factory()->count(3)->create();
+        $userList = UserList::firstOrCreate(
+            ['slug' => UserList::SLUG_ALL_USERS],
+            UserList::factory()->make(['slug' => UserList::SLUG_ALL_USERS])->toArray(),
+        );
+
+        $response = $this->getJson("/api/v1/user-lists/{$userList->id}/users");
+
+        $response->assertStatus(206);
+        $this->assertCount(User::count(), $response->json('data'));
+    }
+
     public function test_it_requires_authentication(): void
     {
         $this->withoutExceptionHandling();
