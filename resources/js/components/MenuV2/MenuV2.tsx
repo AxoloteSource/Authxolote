@@ -7,19 +7,20 @@ import { useMenuV2 } from './useMenuV2'
 interface MenuV2Props {
   menu?: IMenuShow
   editMode?: boolean
-  onEdit?: (id: string) => void
+  onEdit?: (item: IMenuItem) => void
   onDelete?: (id: string) => void
+  onToggleRole?: (item: IMenuItem) => void
 }
 
-export const MenuV2 = ({ menu: menuProp, editMode = false, onEdit, onDelete }: MenuV2Props) => {
+export const MenuV2 = ({ menu: menuProp, editMode = false, onEdit, onDelete, onToggleRole }: MenuV2Props) => {
   const { menu: fetchedMenu, isLoading, missing, message } = useMenuV2()
   const menu = menuProp ?? fetchedMenu
 
   const getItemComponent = (item: IMenuItem) =>
     item.type === 'header' || (item.children?.length ?? 0) > 0 ? (
-      <MenuV2Header key={item.id} item={item} editMode={editMode} onEdit={onEdit} onDelete={onDelete} />
+      <MenuV2Header key={item.id} item={item} editMode={editMode} onEdit={onEdit} onDelete={onDelete} onToggleRole={onToggleRole} />
     ) : (
-      <MenuV2Item key={item.id} item={item} editMode={editMode} onEdit={onEdit} onDelete={onDelete} />
+      <MenuV2Item key={item.id} item={item} editMode={editMode} onEdit={onEdit} onDelete={onDelete} onToggleRole={onToggleRole} />
     )
 
   if (missing) {

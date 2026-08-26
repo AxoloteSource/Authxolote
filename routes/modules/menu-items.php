@@ -16,6 +16,9 @@ Route::controller(MenuItemController::class)->group(function () {
     Route::put('{id}', 'update')
         ->middleware('isAllow:auth.menu_items.update');
 
+    Route::put('{id}/roles/{roleId}', 'updateRole')
+        ->middleware('isAllow:auth.menu_items.roles.update');
+
     Route::delete('{id}', 'destroy')
         ->middleware('isAllow:auth.menu_items.destroy');
 });

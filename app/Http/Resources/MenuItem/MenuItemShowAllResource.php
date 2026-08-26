@@ -25,6 +25,7 @@ class MenuItemShowAllResource extends JsonResource
             'icon' => $this->icon,
             'sort_order' => $this->sort_order,
             'active' => $this->active,
+            'has_role' => $this->hasRole($request),
             'menu' => $this->whenLoaded('menu', fn () => $this->menu?->name),
             'parent' => $this->whenLoaded('parent', fn () => $this->parent?->id),
             'children' => $this->children
@@ -34,5 +35,16 @@ class MenuItemShowAllResource extends JsonResource
             'created_at' => $this->created_at,
             'updated_at' => $this->updated_at,
         ];
+    }
+
+    private function hasRole(Request $request): bool
+    {
+        $roleId = $request->query('role_id');
+
+        if ($roleId === null || $roleId === '') {
+            return true;
+        }
+
+        return $this->isVisibleTo($roleId);
     }
 }

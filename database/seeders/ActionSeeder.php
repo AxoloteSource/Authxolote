@@ -95,6 +95,11 @@ class ActionSeeder extends Seeder
                 'name' => 'auth.menu_items.destroy',
                 'description' => 'Delete menu items',
             ],
+            [
+                'id' => 'fdad38fd-e166-c83a-8a0d-89cd70c08a6d',
+                'name' => 'auth.menu_items.roles.update',
+                'description' => 'Attach or detach a role from a menu item',
+            ],
         ], ['id'], ['name', 'description']);
     }
 }

@@ -29,6 +29,7 @@ export const useMenuItemsPage = () => {
   ]
 
   const { refreshKey, handleSuccess } = useRefreshKey({ module: 'menuItem', service: useServiceIndexMenuItems, close })
+  const { mutateAsync: deleteMenuItem } = useServiceDeleteMenuItem()
 
   const handleEdit = (data: IMenuItem) => {
     open()
@@ -43,8 +44,7 @@ export const useMenuItemsPage = () => {
   const handleDeleteAction = (data: IMenuItem) => () => {
     const confirmed = window.confirm(t('confirm_delete_menu_item'))
     if (confirmed) {
-      const { mutateAsync } = useServiceDeleteMenuItem(data.id)
-      mutateAsync({}).then(() => {
+      deleteMenuItem(data.id).then(() => {
         handleSuccess()
       })
     }

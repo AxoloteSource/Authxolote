@@ -50,6 +50,7 @@ class ActionRoleSeeder extends Seeder
             'auth.menu_items.show',
             'auth.menu_items.update',
             'auth.menu_items.destroy',
+            'auth.menu_items.roles.update',
         ];
     }
 }

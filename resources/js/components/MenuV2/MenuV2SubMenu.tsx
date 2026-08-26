@@ -5,11 +5,12 @@ import { MenuV2Item } from './MenuV2Item'
 interface IMenuV2SubMenuProps {
   items: IMenuItem[]
   editMode?: boolean
-  onEdit?: (id: string) => void
+  onEdit?: (item: IMenuItem) => void
   onDelete?: (id: string) => void
+  onToggleRole?: (item: IMenuItem) => void
 }
 
-export const MenuV2SubMenu = ({ items, editMode = false, onEdit, onDelete }: IMenuV2SubMenuProps) => {
+export const MenuV2SubMenu = ({ items, editMode = false, onEdit, onDelete, onToggleRole }: IMenuV2SubMenuProps) => {
   if (items.length === 0) {
     return null
   }
@@ -18,9 +19,9 @@ export const MenuV2SubMenu = ({ items, editMode = false, onEdit, onDelete }: IMe
     <ul className="sub-menu text-gray-500">
       {items.map((item) =>
         item.type === 'header' || (item.children?.length ?? 0) > 0 ? (
-          <MenuV2Header key={item.id} item={item} editMode={editMode} onEdit={onEdit} onDelete={onDelete} />
+          <MenuV2Header key={item.id} item={item} editMode={editMode} onEdit={onEdit} onDelete={onDelete} onToggleRole={onToggleRole} />
         ) : (
-          <MenuV2Item key={item.id} item={item} editMode={editMode} onEdit={onEdit} onDelete={onDelete} />
+          <MenuV2Item key={item.id} item={item} editMode={editMode} onEdit={onEdit} onDelete={onDelete} onToggleRole={onToggleRole} />
         ),
       )}
     </ul>

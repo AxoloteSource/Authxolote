@@ -6,9 +6,11 @@ use App\Data\MenuItem\MenuItemDeleteData;
 use App\Data\MenuItem\MenuItemShowData;
 use App\Data\MenuItem\MenuItemStoreData;
 use App\Data\MenuItem\MenuItemUpdateData;
+use App\Data\MenuItem\UpdateMenuItemRoleData;
 use App\Http\Controllers\Controller;
 use App\Logics\MenuItem\MenuItemDeleteLogic;
 use App\Logics\MenuItem\MenuItemIndexLogic;
+use App\Logics\MenuItem\MenuItemRoleUpdateLogic;
 use App\Logics\MenuItem\MenuItemShowLogic;
 use App\Logics\MenuItem\MenuItemStoreLogic;
 use App\Logics\MenuItem\MenuItemUpdateLogic;
@@ -33,6 +35,11 @@ class MenuItemController extends Controller
     }
 
     public function update(MenuItemUpdateData $data, MenuItemUpdateLogic $logic): JsonResponse
+    {
+        return $logic->run($data);
+    }
+
+    public function updateRole(UpdateMenuItemRoleData $data, MenuItemRoleUpdateLogic $logic): JsonResponse
     {
         return $logic->run($data);
     }

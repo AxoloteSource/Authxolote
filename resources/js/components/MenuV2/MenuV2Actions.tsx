@@ -6,17 +6,33 @@ import { Pencil, Trash2 } from 'lucide-react'
 
 interface MenuV2ActionsProps {
   item: IMenuItem
-  onEdit?: (id: string) => void
+  onEdit?: (item: IMenuItem) => void
   onDelete?: (id: string) => void
 }
 
 export const MenuV2Actions = ({ item, onEdit, onDelete }: MenuV2ActionsProps) => {
   return (
     <span className="flex shrink-0 items-center gap-1">
-      <Button variant={ButtonVariantEnum.IconOutline} size={SizeEnum.XXS} color="warning" onClick={() => onEdit?.(item.id)}>
+      <Button
+        variant={ButtonVariantEnum.Icon}
+        size={SizeEnum.XXS}
+        color="warning"
+        onClick={(e) => {
+          e?.stopPropagation()
+          onEdit?.(item)
+        }}
+      >
         <Pencil size={14} />
       </Button>
-      <Button variant={ButtonVariantEnum.IconOutline} size={SizeEnum.XXS} color="danger" onClick={() => onDelete?.(item.id)}>
+      <Button
+        variant={ButtonVariantEnum.Icon}
+        size={SizeEnum.XXS}
+        color="danger"
+        onClick={(e) => {
+          e?.stopPropagation()
+          onDelete?.(item.id)
+        }}
+      >
         <Trash2 size={14} />
       </Button>
     </span>

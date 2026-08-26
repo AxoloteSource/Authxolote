@@ -1,9 +1,8 @@
 import { IOptions } from '@/components/Form/Select/interfaces/IOptions'
 import { useOnSubmit } from '@/hooks/useOnSubmit'
 import { IMenuItem, MenuItemType } from '@/interfaces/models/MenuItem/IMenuItem'
-import { useServiceIndexMenus } from '@/services/authxolote/menus/useServiceMenus'
 import { useMenuItemsTree, useServiceStoreMenuItem, useServiceUpdateMenuItem } from '@/services/authxolote/menuItems/useServiceMenuItems'
-import { useMemo, useState } from 'react'
+import { useMemo } from 'react'
 import { useTranslation } from 'react-i18next'
 import * as Yup from 'yup'
 import { es } from 'yup-locales'
@@ -41,14 +40,7 @@ interface IUseMenuItemFormProps {
 
 export const useMenuItemForm = ({ selectedMenuItem, onSuccess }: IUseMenuItemFormProps) => {
   const { t } = useTranslation()
-  const { data: menusData, isLoading: menusLoading } = useServiceIndexMenus({ page: 1, limit: 100 })
-  const [menuId, setMenuId] = useState<string>(selectedMenuItem?.menu_id ?? '')
-  const { options: parentOptions, isLoading: parentLoading } = useMenuItemsTree({ menu_id: menuId })
-
-  const menuOptions = useMemo<IOptions[]>(
-    () => (menusData?.data ?? []).map((menu) => ({ value: menu.id, label: `${menu.name} (${menu.application ?? ''})` })),
-    [menusData]
-  )
+  const { options: parentOptions, isLoading: parentLoading } = useMenuItemsTree({ menu_id: selectedMenuItem?.menu_id ?? '' })
 
   const typeOptions = useMemo<IOptions[]>(
     () => [
@@ -112,5 +104,5 @@ export const useMenuItemForm = ({ selectedMenuItem, onSuccess }: IUseMenuItemFor
     onSubmit
   }
 
-  return { formikProps, t, menuOptions, menusLoading, parentOptions, parentLoading, typeOptions, menuId, setMenuId }
+  return { formikProps, t, parentOptions, parentLoading, typeOptions }
 }

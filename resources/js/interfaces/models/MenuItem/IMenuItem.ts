@@ -12,6 +12,7 @@ export interface IMenuItem {
   icon: string | null
   sort_order: number
   active: boolean
+  has_role?: boolean
   menu?: string | null
   children: IMenuItem[]
   created_at: string
