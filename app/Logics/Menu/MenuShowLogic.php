@@ -32,7 +32,8 @@ class MenuShowLogic extends ShowLogic
             ->with([
                 'application',
                 'items' => fn ($query) => $query->whereNull('parent_id')
-                    ->with(['roles', 'children.roles'])
+                    ->where('active', true)
+                    ->with(['roles', 'children' => fn ($childQuery) => $childQuery->where('active', true)->with('roles')])
                     ->orderBy('sort_order'),
             ]);
     }

@@ -75,6 +75,7 @@
   "menu_item_active": "Active (assigned to role)",
   "menu_item_disabled": "Disabled item",
   "menu_item_missing_role": "Role doesn't have this item",
+  "menu_item_toggle_hint": "Click on an item to link or unlink it from the selected role.",
   "menu_item_path_or_route_error": "Select a route or a path for links, or none for headers",
   "menu_required": "Menu is required",
   "menu_show": "Menu Details",

@@ -3,6 +3,7 @@ import { ButtonTypeEnum } from '@/components/Buttons/enums/buttonType.enum'
 import { Input } from '@/components/Form/Input'
 import { InputTypeEnum } from '@/components/Form/Input/InputType.enum'
 import { IOptions } from '@/components/Form/Select/interfaces/IOptions'
+import Switch from '@/components/Form/Switch/Switch'
 import InputSelect from '@/components/Form/Select/Select'
 import { Color } from '@/enums/Color'
 import { IMenuItem } from '@/interfaces/models/MenuItem/IMenuItem'
@@ -32,6 +33,7 @@ export const MenuItemFormFields = ({ selectedMenuItem, onSuccess, onCancel }: IM
             label={`${t('type')}`}
             formik={formik}
             options={typeOptions}
+            isLoading={false}
             onChange={(newValue) => {
               const value = (newValue as SingleValue<IOptions> | null)?.value
               if (value === 'header') {
@@ -68,6 +70,9 @@ export const MenuItemFormFields = ({ selectedMenuItem, onSuccess, onCancel }: IM
             label={`${t('sort_order')}`}
             formik={formik}
           />
+          <div className="col-span-12">
+            <Switch<IInitialValuesMenuItem> name="active" label={t('active')} formik={formik} />
+          </div>
           <div className="col-span-12 mt-3 flex justify-between gap-3">
             <Button className="col-span-12 md:col-span-6" onClick={onCancel} type={ButtonTypeEnum.Button} color={Color.White}>
               {t('cancel')}

@@ -69,6 +69,7 @@
   "application_required": "La aplicación es requerida",
   "menu_required": "El menú es requerido",
   "menu_item_path_or_route_error": "Selecciona una ruta o un camino para enlaces, o ninguno para encabezados",
+  "menu_item_toggle_hint": "Haz clic en un ítem para vincularlo o desvincularlo del rol seleccionado.",
   "confirm_delete_application": "¿Eliminar esta aplicación?",
   "confirm_delete_menu": "¿Eliminar este menú?",
   "confirm_delete_menu_item": "¿Eliminar este ítem de menú?",

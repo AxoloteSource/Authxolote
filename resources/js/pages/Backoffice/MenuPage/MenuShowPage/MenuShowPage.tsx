@@ -1,16 +1,12 @@
-import { alertSwal } from '@/components/AlertSwal/AlertSwal'
 import Card from '@/components/Card/Card'
 import CardTitle from '@/components/Card/partials/CardTitle'
 import InputSelect from '@/components/Form/Select/Select'
 import { IOptions } from '@/components/Form/Select/interfaces/IOptions'
 import { MenuV2 } from '@/components/MenuV2/MenuV2'
+import { resolveIcon } from '@/components/MenuV2/resolveIcon'
 import { Page } from '@/components/Page/Page'
-import { AlertTypeEnum } from '@/enums/types/AlertTypeEnum'
-import { IMenuItem } from '@/interfaces/models/MenuItem/IMenuItem'
 import { RoutesBackoffice } from '@/routes/modules/backoffice.routes'
-import { useServiceDeleteMenuItem, useServiceToggleMenuItemRole } from '@/services/authxolote/menuItems/useServiceMenuItems'
 import { Form, Formik } from 'formik'
-import { useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { SingleValue, MultiValue } from 'react-select'
 import { MenuItemFormFields } from '../MenuItemsPage/partials/MenuItemForm/MenuItemFormFields'
@@ -27,52 +23,19 @@ interface IInitialValuesMenuShow {
 }
 
 const MenuShowPage = () => {
-  const { menu, roleOptions, rolesLoading, setRoleId, roleId, refetchMenu } = useMenuShowPage()
+  const {
+    menu,
+    roleOptions,
+    rolesLoading,
+    selectedMenuItem,
+    handleEdit,
+    handleToggleRole,
+    handleDelete,
+    handleCancel,
+    handleSuccess,
+    handleRoleChange
+  } = useMenuShowPage()
   const { t } = useTranslation()
-  const [selectedMenuItem, setSelectedMenuItem] = useState<IMenuItem | null>(null)
-  const { mutateAsync: deleteMenuItem } = useServiceDeleteMenuItem()
-  const { mutateAsync: toggleMenuItemRole } = useServiceToggleMenuItemRole()
-
-  const handleEdit = (item: IMenuItem) => {
-    setSelectedMenuItem(item)
-  }
-
-  const handleToggleRole = (item: IMenuItem) => {
-    if (!roleId) {
-      return
-    }
-
-    toggleMenuItemRole({ id: item.id, roleId, active: !item.has_role }).then(() => refetchMenu())
-  }
-
-  const handleDelete = async (id: string) => {
-    const result = await alertSwal({
-      type: AlertTypeEnum.Confirm,
-      title: t('confirm_delete_menu_item'),
-      text: t('cannot_undo')
-    })
-
-    if (result?.isConfirmed) {
-      deleteMenuItem(id).then(() => {
-        refetchMenu()
-        alertSwal({ type: AlertTypeEnum.SuccessNotification })
-      })
-    }
-  }
-
-  const handleCancel = () => {
-    setSelectedMenuItem(null)
-  }
-
-  const handleSuccess = () => {
-    setSelectedMenuItem(null)
-    refetchMenu()
-  }
-
-  const handleRoleChange = (newValue: SingleValue<IOptions> | MultiValue<IOptions>) => {
-    const value = (newValue as SingleValue<IOptions> | null)?.value
-    setRoleId(value != null ? String(value) : null)
-  }
 
   return (
     <Page titleTranslation="menu_show" breadCrumblesItems={breadCrumblesItems}>
@@ -104,6 +67,7 @@ const MenuShowPage = () => {
               </ul>
             </nav>
             <div className="mt-4 flex flex-col gap-2 border-t border-[var(--border)] pt-4">
+              <p className="text-sm text-gray-500">{t('menu_item_toggle_hint')}</p>
               <span className="text-sm font-semibold">{t('legend')}</span>
               <div className="flex flex-col justify-start gap-4 text-sm">
                 <div className="flex items-center gap-2">
@@ -125,6 +89,12 @@ const MenuShowPage = () => {
         <Card className="w-full">
           {selectedMenuItem && (
             <div>
+              <CardTitle>
+                <span className="flex">
+                  {resolveIcon(selectedMenuItem.icon, 'mr-2')}
+                  {t(selectedMenuItem.name)}
+                </span>
+              </CardTitle>
               <MenuItemFormFields selectedMenuItem={selectedMenuItem} onSuccess={handleSuccess} onCancel={handleCancel} />
             </div>
           )}

@@ -75,6 +75,7 @@
   "menu_item_active": "Activo (asignado al rol)",
   "menu_item_disabled": "Ítem desactivado",
   "menu_item_missing_role": "El rol no tiene este ítem",
+  "menu_item_toggle_hint": "Haz clic en un ítem para vincularlo o desvincularlo del rol seleccionado.",
   "menu_item_path_or_route_error": "Selecciona una ruta o un camino para enlaces, o ninguno para encabezados",
   "menu_required": "El menú es requerido",
   "menu_show": "Vista de Menú",
