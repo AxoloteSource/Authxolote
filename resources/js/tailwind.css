@@ -305,11 +305,11 @@
 
   .sidebar ul.sub-menu li button,
   .sidebar ul.sub-menu li a {
-    @apply hover:text-primary hover:before:!bg-primary dark:hover:text-primary flex w-full items-center px-9 py-2.5 before:h-0.5 before:w-2 before:rounded before:bg-gray-300 hover:bg-gray-100 ltr:before:mr-2 rtl:before:ml-2 dark:before:bg-gray-500 dark:hover:bg-gray-900;
+    @apply hover:text-primary dark:hover:text-primary flex w-full items-center px-9 py-2.5 hover:bg-gray-100 dark:hover:bg-gray-900;
   }
   .sidebar ul.sub-menu li button.active,
   .sidebar ul.sub-menu li a.active {
-    @apply text-primary before:bg-primary;
+    @apply text-primary;
   }
 
   .sidebar .nav-item a div:first-child svg,

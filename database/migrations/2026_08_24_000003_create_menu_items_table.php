@@ -14,6 +14,7 @@ return new class extends Migration
             $table->foreignUuid('parent_id')->nullable()->constrained('menu_items')->cascadeOnDelete();
             $table->string('type')->default('link');
             $table->string('name');
+            $table->string('slug')->unique();
             $table->string('route')->nullable();
             $table->string('path')->nullable();
             $table->string('icon')->nullable();

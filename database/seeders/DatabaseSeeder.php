@@ -18,6 +18,7 @@ class DatabaseSeeder extends Seeder
             SettingSeeder::class,
             ApplicationSeeder::class,
             MenuSeeder::class,
+            MenuItemSeeder::class,
         ]);
     }
 }

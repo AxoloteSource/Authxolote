@@ -48,14 +48,14 @@ class MenuIndexTest extends TestCase
         $this->assertEquals('Topbar', $response->json('data.0.name'));
     }
 
-    public function test_it_returns_sidebar_menu_by_default(): void
+    public function test_it_returns_auth_menu_by_default(): void
     {
         $this->loginRoot();
 
         $response = $this->getJson('/api/v1/menus');
 
         $response->assertStatus(206);
-        $response->assertJsonFragment(['slug' => 'sidebar']);
+        $response->assertJsonFragment(['slug' => 'auth']);
     }
 
     public function test_it_requires_authentication(): void

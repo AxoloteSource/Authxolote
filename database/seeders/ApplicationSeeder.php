@@ -7,17 +7,16 @@ use Illuminate\Database\Seeder;
 
 class ApplicationSeeder extends Seeder
 {
-    public const SLUG_BACKOFFICE = 'backoffice';
+    public const string SLUG_AUTH = 'auth';
 
     public function run(): void
     {
-        Application::firstOrCreate(
-            ['slug' => self::SLUG_BACKOFFICE],
+        Application::upsert([
             [
-                'slug' => self::SLUG_BACKOFFICE,
-                'name' => 'Backoffice',
-                'description' => 'Panel de administración del Backoffice',
+                'name' => 'Auth',
+                'slug' => self::SLUG_AUTH,
+                'description' => 'Aplicación de autenticación',
             ],
-        );
+        ], ['slug'], ['name', 'description']);
     }
 }

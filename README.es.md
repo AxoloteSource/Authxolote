@@ -34,6 +34,9 @@ Sigue estos pasos para poner en marcha el proyecto:
    - `ROOT_USER_EMAIL`: El correo electrónico del usuario root.
    - `ROOT_USER_PASSWORD`: La contraseña para el usuario root.
 
+   **Variables de entorno del frontend (Backoffice):**
+   - `VITE_MENU_SLUG`: El slug del menú que se renderiza en el Backoffice mediante el componente `MenuV2`. Debe coincidir con el `slug` de un menú existente en la base de datos (ej. `auth`).
+
    Genera la clave de la aplicación:
    ```bash
    php artisan key:generate

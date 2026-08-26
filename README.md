@@ -34,6 +34,9 @@ Follow these steps to get the project up and running:
    - `ROOT_USER_EMAIL`: The email address of the root user.
    - `ROOT_USER_PASSWORD`: The password for the root user.
 
+   **Frontend environment variables (Backoffice):**
+   - `VITE_MENU_SLUG`: The slug of the menu rendered in the Backoffice via the `MenuV2` component. It must match the `slug` of an existing menu in the database (e.g. `auth`).
+
    Generate the application key:
    ```bash
    php artisan key:generate

@@ -49,14 +49,14 @@ class MenuItemIndexTest extends TestCase
         $this->assertNotContains($child->id, $topLevelIds);
     }
 
-    public function test_it_returns_sidebar_items_by_default(): void
+    public function test_it_returns_auth_menu_items_by_default(): void
     {
         $this->loginRoot();
 
         $response = $this->getJson('/api/v1/menu-items');
 
         $response->assertStatus(206);
-        $response->assertJsonFragment(['name' => 'Inicio']);
+        $response->assertJsonFragment(['name' => 'home']);
     }
 
     public function test_it_requires_authentication(): void

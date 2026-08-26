@@ -3,6 +3,7 @@ import { useDELETE, useGET, usePOST, usePUT } from '@/hooks/useApi'
 import { IPaginate } from '@/interfaces/IPaginate'
 import { IPaginateServiceProps } from '@/interfaces/IPaginateServiceProps'
 import { IMenu } from '@/interfaces/models/Menu/IMenu'
+import { IMenuShow } from '@/interfaces/models/Menu/IMenuShow'
 
 const url = '/api/v1/menus'
 const urlLogin = ApisEnum.BaseLogin
@@ -19,6 +20,8 @@ export const useServiceIndexMenus = ({ filters = [], search = null, page = 1, li
     }
   })
 }
+
+export const useServiceShowMenu = (slug: string, enabled = true) => useGET<IMenuShow>({ url: `${url}/${slug}`, customHost: urlLogin, enabled })
 
 export const useServiceStoreMenu = () => usePOST<IMenu>({ url, customHost: urlLogin })
 export const useServiceUpdateMenu = (id: string) => usePUT<IMenu>({ url: `${url}/${id}`, customHost: urlLogin })

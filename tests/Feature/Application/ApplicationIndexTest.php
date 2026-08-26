@@ -47,14 +47,14 @@ class ApplicationIndexTest extends TestCase
         $this->assertEquals('Storefront', $response->json('data.0.name'));
     }
 
-    public function test_it_returns_backoffice_application_by_default(): void
+    public function test_it_returns_auth_application_by_default(): void
     {
         $this->loginRoot();
 
         $response = $this->getJson('/api/v1/applications');
 
         $response->assertStatus(206);
-        $response->assertJsonFragment(['slug' => 'backoffice']);
+        $response->assertJsonFragment(['slug' => 'auth']);
     }
 
     public function test_it_requires_authentication(): void

@@ -1,5 +1,4 @@
-// import { Menu } from '@/appComponents/Menu/Menu'
-import { Menu } from '@/appComponents/Menu/Menu'
+import { MenuV2 } from '@/components/MenuV2/MenuV2'
 import { toggleSidebar } from '@/store/themeConfigSlice'
 import PerfectScrollbar from 'react-perfect-scrollbar'
 import { NavLink } from 'react-router-dom'
@@ -57,7 +56,7 @@ const Sidebar = () => {
               </h2>
 
               <li className="nav-item">
-                <Menu />
+                <MenuV2 />
               </li>
             </ul>
           </PerfectScrollbar>
