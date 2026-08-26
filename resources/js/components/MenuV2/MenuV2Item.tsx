@@ -28,7 +28,9 @@ export const MenuV2Item = ({ item, editMode = false, onEdit, onDelete, onToggleR
             onToggleRole?.(item)
           }
         }}
-        className={`group${editMode ? ' ltr:pr-20 rtl:pl-20' : ''}${isMissing ? ' bg-gray-500!' : ''}`}
+        className={({ isActive }) =>
+          `group${editMode ? ' ltr:pr-20 rtl:pl-20' : ''}${isMissing ? ' bg-gray-500!' : ''}${!editMode && isActive ? ' active' : ''}`
+        }
       >
         <div className="flex items-center">
           {icon}

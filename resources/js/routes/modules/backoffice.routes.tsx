@@ -10,7 +10,6 @@ const UserPage = lazy(() => import('@/pages/Backoffice/UserPage/UserPage'))
 const UserListPage = lazy(() => import('@/pages/Backoffice/UserListPage/UserListPage'))
 const ApplicationsPage = lazy(() => import('@/pages/Backoffice/ApplicationsPage/ApplicationsPage'))
 const MenusPage = lazy(() => import('@/pages/Backoffice/MenuPage/MenusPage/MenusPage'))
-const MenuItemsPage = lazy(() => import('@/pages/Backoffice/MenuPage/MenuItemsPage/MenuItemsPage'))
 const MenuShowPage = lazy(() => import('@/pages/Backoffice/MenuPage/MenuShowPage/MenuShowPage'))
 const DEBUG_ERRORS = import.meta.env.VITE_DEBUG_ERRORS === 'true'
 const ErrorTestPage = DEBUG_ERRORS ? lazy(() => import('@/pages/ErrorTestPage/ErrorTestPage')) : undefined
@@ -25,7 +24,6 @@ export enum RoutesBackoffice {
   UserLists = '/user-lists',
   MenuApplications = '/applications',
   MenuMenus = '/menus',
-  MenuMenuItems = '/menus/items',
   MenuShow = '/menus/show',
   Ui = '/ui',
   UiPricingCard = '/ui/pricing-card'
@@ -55,11 +53,6 @@ export const backofficeRoutes: IRoute[] = [
   {
     path: RoutesBackoffice.MenuMenus,
     element: <MenusPage />,
-    private: true
-  },
-  {
-    path: RoutesBackoffice.MenuMenuItems,
-    element: <MenuItemsPage />,
     private: true
   },
   {

@@ -20,7 +20,7 @@ class MenuItemUpdateData extends Data
         public MenuItemType $type,
         #[Rule('required|string|max:255')]
         public string $name,
-        #[Rule('required|string|max:255')]
+        #[Rule('required|string|max:255|unique:menu_items,slug,{id}")]
         public string $slug,
         #[Rule('nullable|string|max:255')]
         public ?string $route,

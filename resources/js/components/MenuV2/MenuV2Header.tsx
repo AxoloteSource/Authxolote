@@ -27,12 +27,22 @@ export const MenuV2Header = ({ item, editMode = false, onEdit, onDelete, onToggl
   return (
     <li className="menu nav-item relative">
       <button
-        type="button"
+        tabIndex={0}
         onClick={() => {
           if (editMode) {
             onToggleRole?.(item)
           } else {
             setOpen((prev) => !prev)
+          }
+        }}
+        onKeyDown={(e) => {
+          if (e.key === 'Enter' || e.key === ' ') {
+            e.preventDefault()
+            if (editMode) {
+              onToggleRole?.(item)
+            } else {
+              setOpen((prev) => !prev)
+            }
           }
         }}
         className={`group relative w-full cursor-pointer${editMode ? ' ltr:pr-20 rtl:pl-20' : ''}${isMissing ? ' bg-gray-500!' : ''}`}

@@ -36,9 +36,10 @@ const initialValues: IInitialValuesMenuItem = {
 interface IUseMenuItemFormProps {
   selectedMenuItem?: IMenuItem | null
   onSuccess?: () => void
+  menuId?: string
 }
 
-export const useMenuItemForm = ({ selectedMenuItem, onSuccess }: IUseMenuItemFormProps) => {
+export const useMenuItemForm = ({ selectedMenuItem, onSuccess, menuId }: IUseMenuItemFormProps) => {
   const { t } = useTranslation()
   const { options: parentOptions, isLoading: parentLoading } = useMenuItemsTree({ menu_id: selectedMenuItem?.menu_id ?? '' })
 
@@ -86,7 +87,7 @@ export const useMenuItemForm = ({ selectedMenuItem, onSuccess }: IUseMenuItemFor
 
   const filledValues = {
     ...initialValues,
-    menu_id: selectedMenuItem?.menu_id ?? '',
+    menu_id: selectedMenuItem?.menu_id ?? menuId ?? '',
     parent_id: selectedMenuItem?.parent_id ?? '',
     type: (selectedMenuItem?.type ?? 'link') as MenuItemType,
     name: selectedMenuItem?.name ?? '',

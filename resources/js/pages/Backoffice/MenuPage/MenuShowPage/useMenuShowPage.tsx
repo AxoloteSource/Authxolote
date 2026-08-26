@@ -17,6 +17,7 @@ export const useMenuShowPage = () => {
   const enabled = Boolean(slug)
   const [roleId, setRoleId] = useState<string | null>(null)
   const [selectedMenuItem, setSelectedMenuItem] = useState<IMenuItem | null>(null)
+  const [isModalOpen, setIsModalOpen] = useState(false)
 
   const { data: menu, isLoading, refetch: refetchMenu } = useServiceShowAllMenu(slug ?? '', enabled, roleId)
   const { data: rolesData, isLoading: rolesLoading } = useServiceIndexRoles({ page: 1, limit: 100 })
@@ -59,6 +60,9 @@ export const useMenuShowPage = () => {
     setSelectedMenuItem(null)
   }
 
+  const openModal = () => setIsModalOpen(true)
+  const closeModal = () => setIsModalOpen(false)
+
   const handleSuccess = () => {
     setSelectedMenuItem(null)
     refetchMenu()
@@ -85,6 +89,9 @@ export const useMenuShowPage = () => {
     handleDelete,
     handleCancel,
     handleSuccess,
-    handleRoleChange
+    handleRoleChange,
+    isModalOpen,
+    openModal,
+    closeModal
   }
 }

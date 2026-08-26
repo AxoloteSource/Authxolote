@@ -1,16 +1,19 @@
+import Button from '@/components/Buttons/Button'
+import { ButtonTypeEnum } from '@/components/Buttons/enums/buttonType.enum'
 import Card from '@/components/Card/Card'
 import CardTitle from '@/components/Card/partials/CardTitle'
 import InputSelect from '@/components/Form/Select/Select'
-import { IOptions } from '@/components/Form/Select/interfaces/IOptions'
 import { MenuV2 } from '@/components/MenuV2/MenuV2'
 import { resolveIcon } from '@/components/MenuV2/resolveIcon'
+import { Color } from '@/enums/Color'
 import { Page } from '@/components/Page/Page'
 import { RoutesBackoffice } from '@/routes/modules/backoffice.routes'
 import { Form, Formik } from 'formik'
 import { useTranslation } from 'react-i18next'
-import { SingleValue, MultiValue } from 'react-select'
-import { MenuItemFormFields } from '../MenuItemsPage/partials/MenuItemForm/MenuItemFormFields'
+import { Plus } from 'lucide-react'
+import { MenuItemFormFields } from './partials/MenuItemForm/MenuItemFormFields'
 import { useMenuShowPage } from './useMenuShowPage'
+import {SizeEnum} from "@/enums/SizeEnum";
 
 const breadCrumblesItems = [
   { to: RoutesBackoffice.Home, children: 'home' },
@@ -33,7 +36,10 @@ const MenuShowPage = () => {
     handleDelete,
     handleCancel,
     handleSuccess,
-    handleRoleChange
+    handleRoleChange,
+    isModalOpen,
+    openModal,
+    closeModal
   } = useMenuShowPage()
   const { t } = useTranslation()
 
@@ -58,7 +64,15 @@ const MenuShowPage = () => {
             </Formik>
           </Card>
           <Card>
-            <CardTitle>{t('menu')}</CardTitle>
+            <div className="flex items-center justify-between">
+              <CardTitle actionButton={
+                <Button type={ButtonTypeEnum.Button} color={Color.Primary} onClick={openModal} size={SizeEnum.XXS}>
+                  <Plus size={16} className="mr-1" />
+                  {t('new')}
+                </Button>
+              }>{t('menu')}</CardTitle>
+
+            </div>
             <nav className={`sidebar py-4 shadow-[5px_0_25px_0_rgba(94,92,154,0.1)] transition-all duration-300`}>
               <ul className="relative space-y-0.5 p-4 py-0 font-semibold">
                 <li className="nav-item">
@@ -87,7 +101,7 @@ const MenuShowPage = () => {
           </Card>
         </div>
         <Card className="w-full">
-          {selectedMenuItem && (
+          {selectedMenuItem ? (
             <div>
               <CardTitle>
                 <span className="flex">
@@ -97,7 +111,12 @@ const MenuShowPage = () => {
               </CardTitle>
               <MenuItemFormFields selectedMenuItem={selectedMenuItem} onSuccess={handleSuccess} onCancel={handleCancel} />
             </div>
-          )}
+          ) : isModalOpen ? (
+            <div>
+              <CardTitle>{t('new_menu_item')}</CardTitle>
+              <MenuItemFormFields onSuccess={handleSuccess} onCancel={closeModal} menuId={menu?.id} />
+            </div>
+          ) : null}
         </Card>
       </div>
     </Page>

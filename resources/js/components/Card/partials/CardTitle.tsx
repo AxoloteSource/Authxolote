@@ -7,7 +7,7 @@ export interface ICardTitleProps {
 
 const CardTitle = ({ children, actionButton }: ICardTitleProps) => {
   return (
-    <div className="mb-5 flex items-center justify-between">
+    <div className="mb-5 flex items-center justify-between w-full">
       <h5 className="dark:text-white-light text-lg font-semibold">{children}</h5>
       {actionButton}
     </div>

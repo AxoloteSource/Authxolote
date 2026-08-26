@@ -15,12 +15,14 @@ interface IMenuItemFormFieldsProps {
   onSuccess?: () => void
   onCancel: () => void
   selectedMenuItem?: IMenuItem | null
+  menuId?: string
 }
 
-export const MenuItemFormFields = ({ selectedMenuItem, onSuccess, onCancel }: IMenuItemFormFieldsProps) => {
+export const MenuItemFormFields = ({ selectedMenuItem, onSuccess, onCancel, menuId }: IMenuItemFormFieldsProps) => {
   const { formikProps, t, parentOptions, parentLoading, typeOptions } = useMenuItemForm({
     selectedMenuItem,
-    onSuccess
+    onSuccess,
+    menuId
   })
 
   return (
