@@ -29,7 +29,12 @@ class MenuShowLogic extends ShowLogic
     {
         return $this->model->newQuery()
             ->where('slug', $this->input->slug)
-            ->with(['application', 'items' => fn ($query) => $query->whereNull('parent_id')->orderBy('sort_order')]);
+            ->with([
+                'application',
+                'items' => fn ($query) => $query->whereNull('parent_id')
+                    ->with(['roles', 'children.roles'])
+                    ->orderBy('sort_order'),
+            ]);
     }
 
     protected function withResource(): MenuShowResource

@@ -3,11 +3,13 @@
 namespace App\Models;
 
 use App\Enums\MenuItemType;
+use App\Enums\RoleEnum;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
@@ -39,6 +41,11 @@ class MenuItem extends Model
         return $this->belongsTo(Menu::class);
     }
 
+    public function roles(): BelongsToMany
+    {
+        return $this->belongsToMany(Role::class);
+    }
+
     public function parent(): BelongsTo
     {
         return $this->belongsTo(MenuItem::class, 'parent_id');
@@ -58,6 +65,23 @@ class MenuItem extends Model
     public function isLink(): bool
     {
         return $this->type?->isLink() ?? false;
+    }
+
+    public function isVisibleTo(?string $roleId): bool
+    {
+        if ($roleId === RoleEnum::Root->value) {
+            return true;
+        }
+
+        if ($roleId === null) {
+            return false;
+        }
+
+        if ($this->relationLoaded('roles')) {
+            return $this->roles->contains('id', $roleId);
+        }
+
+        return $this->roles()->where('roles.id', $roleId)->exists();
     }
 
     public function scopeOrdered(Builder $query): Builder

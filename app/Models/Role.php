@@ -22,6 +22,11 @@ class Role extends Model
         return $this->belongsToMany(Action::class);
     }
 
+    public function menuItems(): BelongsToMany
+    {
+        return $this->belongsToMany(MenuItem::class);
+    }
+
     public function users(): HasMany
     {
         return $this->hasMany(User::class);

@@ -4,6 +4,7 @@ namespace App\Http\Resources\Menu;
 
 use App\Http\Resources\MenuItem\MenuItemShowResource;
 use App\Models\Menu;
+use App\Models\MenuItem;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 
@@ -23,9 +24,18 @@ class MenuShowResource extends JsonResource
             'icon' => $this->icon,
             'sort_order' => $this->sort_order,
             'active' => $this->active,
-            'items' => $this->whenLoaded('items', fn () => MenuItemShowResource::collection($this->items)->resolve()),
+            'items' => $this->whenLoaded('items', fn () => MenuItemShowResource::collection(
+                $this->items
+                    ->filter(fn (MenuItem $item) => $item->isVisibleTo($this->currentRoleId($request)))
+                    ->values()
+            )->resolve()),
             'created_at' => $this->created_at,
             'updated_at' => $this->updated_at,
         ];
+    }
+
+    private function currentRoleId(Request $request): ?string
+    {
+        return $request->user()?->role_id;
     }
 }

@@ -155,5 +155,16 @@
   "viewport": "Viewport",
   "warning": "Advertencia",
   "wednesday": "Miércoles",
-  "yes": "Si"
+  "yes": "Si",
+  "home": "Inicio",
+  "users": "Usuarios",
+  "user_lists": "Listas de usuarios",
+  "applications": "Aplicaciones",
+  "menu.catalogs": "Catálogos",
+  "menu.menus": "Menús",
+  "UI Components": "Componentes UI",
+  "Roles": "Roles",
+  "Menus": "Menús",
+  "Menu Items": "Ítems de menú",
+  "Pricing Card": "Tarjeta de precios"
 }

@@ -27,9 +27,18 @@ class MenuItemShowResource extends JsonResource
             'active' => $this->active,
             'menu' => $this->whenLoaded('menu', fn () => $this->menu?->name),
             'parent' => $this->whenLoaded('parent', fn () => $this->parent?->id),
-            'children' => $this->children->map(fn (MenuItem $child) => new MenuItemShowResource($child))->toArray(),
+            'children' => $this->children
+                ->filter(fn (MenuItem $child) => $child->isVisibleTo($this->currentRoleId($request)))
+                ->values()
+                ->map(fn (MenuItem $child) => new MenuItemShowResource($child))
+                ->toArray(),
             'created_at' => $this->created_at,
             'updated_at' => $this->updated_at,
         ];
+    }
+
+    private function currentRoleId(Request $request): ?string
+    {
+        return $request->user()?->role_id;
     }
 }
