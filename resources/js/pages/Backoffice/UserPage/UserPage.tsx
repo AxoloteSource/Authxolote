@@ -8,10 +8,10 @@ import { useUserPage } from './useUserPage'
 const breadCrumblesItems = [{ to: RoutesBackoffice.Home, children: 'home' }, { children: 'users' }]
 
 const UserPage = () => {
-  const { filters } = useUserPage()
+  const { filters, renderersMap } = useUserPage()
   return (
     <Page titleTranslation="users" breadCrumblesItems={breadCrumblesItems}>
-      <DataTableFilter filters={filters} onClickNew={() => {}} service={useServiceIndexUsers} showNewButton={false} withoutFilters={false}>
+      <DataTableFilter filters={filters} onClickNew={() => {}} service={useServiceIndexUsers} renderersMap={renderersMap} showNewButton={false} withoutFilters={false}>
         {(formik) => <FilterFormUser formik={formik} />}
       </DataTableFilter>
     </Page>

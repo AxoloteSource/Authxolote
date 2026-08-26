@@ -15,7 +15,7 @@ import 'mantine-datatable/styles.layer.css'
 // Tailwind css
 import './tailwind.css'
 
-import './i18n'
+import i18n from './i18n'
 
 // Redux
 import { MantineProvider } from '@mantine/core'
@@ -38,7 +38,7 @@ ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
         <ThemeProvider defaultTheme="dark" storageKey="theme">
           <MantineProvider>
             <QueryClientProvider client={queryClient}>
-              <Suspense fallback={<div>Cargando...</div>}>
+              <Suspense fallback={<div>{i18n.t('loading')}</div>}>
                 <RouterProvider router={routes} />
               </Suspense>
             </QueryClientProvider>

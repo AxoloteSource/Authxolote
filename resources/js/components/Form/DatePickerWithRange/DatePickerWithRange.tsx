@@ -11,6 +11,7 @@ import { Button } from '@/components/ui/button'
 import { Calendar } from '@/components/ui/calendar'
 import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover'
 import { cn } from '@/lib/utils'
+import { useTranslation } from 'react-i18next'
 
 export function DatePickerWithRange<T extends object>({
   className,
@@ -20,6 +21,8 @@ export function DatePickerWithRange<T extends object>({
   allowEmpty = false,
   initialValues
 }: IDatePickerWithRangeProps<T>) {
+  const { t } = useTranslation()
+
   const { date, handleSelect } = useDatepickerWithRange({
     name,
     formik,
@@ -42,7 +45,7 @@ export function DatePickerWithRange<T extends object>({
                 format(date.from, "d 'de' MMMM 'de' y", { locale: es })
               )
             ) : (
-              <span>Seleccionar fechas</span>
+              <span>{t('select_dates')}</span>
             )}
           </Button>
         </PopoverTrigger>

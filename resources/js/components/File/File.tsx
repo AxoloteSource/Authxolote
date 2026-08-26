@@ -1,11 +1,13 @@
 import { IFileProps } from '@/components/File/IFileProps'
 import { useShowFile } from '@/services/file/useFileService'
+import { useTranslation } from 'react-i18next'
 
 const File = ({ className = '', url }: IFileProps) => {
+  const { t } = useTranslation()
   const { data, isLoading } = useShowFile(url)
 
   if (isLoading) {
-    return <div>Loading...</div>
+    return <div>{t('loading')}</div>
   }
 
   return (

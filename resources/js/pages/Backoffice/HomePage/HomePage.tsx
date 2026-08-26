@@ -17,9 +17,9 @@ const HomePage = () => {
     <Page titleTranslation="home" breadCrumblesItems={breadCrumblesItems}>
       <div className="space-y-6 p-6">
         <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
-          <InfoBoxAlt title="Solicitudes" value={stats.solicitudes} icon={<Inbox className="h-full w-full" />} color={chartColors.primary} />
-          <InfoBoxAlt title="Pendientes" value={stats.pendientes} icon={<Mailbox className="h-full w-full" />} color={chartColors.secondary} />
-          <InfoBoxAlt title="Finalizadas" value={stats.finalizadas} icon={<CheckIcon className="h-full w-full" />} color={chartColors.success} />
+          <InfoBoxAlt title={t('requests')} value={stats.solicitudes} icon={<Inbox className="h-full w-full" />} color={chartColors.primary} />
+          <InfoBoxAlt title={t('pending')} value={stats.pendientes} icon={<Mailbox className="h-full w-full" />} color={chartColors.secondary} />
+          <InfoBoxAlt title={t('completed')} value={stats.finalizadas} icon={<CheckIcon className="h-full w-full" />} color={chartColors.success} />
         </div>
 
         <div className="grid grid-cols-1 gap-6 md:grid-cols-2">

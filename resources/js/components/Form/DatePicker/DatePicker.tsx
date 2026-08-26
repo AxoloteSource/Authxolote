@@ -12,8 +12,11 @@ import { Button } from '@/components/ui/button'
 import { Calendar } from '@/components/ui/calendar'
 import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover'
 import { cn } from '@/lib/utils'
+import { useTranslation } from 'react-i18next'
 
 export function DatePicker<T extends object>({ className, name, formik, label, allowEmpty = false, initialValue }: IDatePickerProps<T>) {
+  const { t } = useTranslation()
+
   const { date, handleSelect } = useDatepicker<T>({
     name,
     formik,
@@ -40,7 +43,7 @@ export function DatePicker<T extends object>({ className, name, formik, label, a
             className={cn('form-input w-full justify-start text-left font-normal', !date && 'text-muted-foreground')}
           >
             <CalendarIcon className="mr-2 h-4 w-4" />
-            {date ? format(date, "d 'de' MMMM 'de' y", { locale: es }) : <span>Seleccionar fecha</span>}
+            {date ? format(date, "d 'de' MMMM 'de' y", { locale: es }) : <span>{t('select_date')}</span>}
           </Button>
         </PopoverTrigger>
         <PopoverContent className="z-[9999] w-auto p-0" align="start">

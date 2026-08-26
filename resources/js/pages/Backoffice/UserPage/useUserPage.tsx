@@ -20,7 +20,12 @@ export const useUserPage = () => {
     }
   ]
 
+  const renderersMap = {
+    role: (user: IUser) => user.role?.name ?? ''
+  }
+
   return {
-    filters
+    filters,
+    renderersMap
   }
 }

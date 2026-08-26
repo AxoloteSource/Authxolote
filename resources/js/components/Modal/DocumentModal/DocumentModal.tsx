@@ -1,8 +1,10 @@
 import { CircleX, Download, Eye, TriangleAlert } from 'lucide-react'
+import { useTranslation } from 'react-i18next'
 import { IModalProps } from '../IModalProps'
 import { useDocumentModal } from './useDocumentModal'
 
 export const DocumentModal = ({ selectedFile, isOpen, close }: IModalProps) => {
+  const { t } = useTranslation()
   const { isPDF, isImage, fileDisplayName, fileExtension, iframeUrl, isMobile, handleImageError } = useDocumentModal({ selectedFile })
 
   if (!isOpen || !selectedFile) return null
@@ -13,8 +15,8 @@ export const DocumentModal = ({ selectedFile, isOpen, close }: IModalProps) => {
         <div className="bg-background flex h-full w-full items-center justify-center">
           <div className="mx-auto max-w-sm p-6 text-center">
             <Eye className="mx-auto mb-4 h-16 w-16 text-blue-500 dark:text-blue-400" />
-            <h4 className="mb-2 text-lg font-medium text-gray-700 dark:text-gray-200">Archivo listo para descargar</h4>
-            <p className="mb-6 text-sm text-gray-500 dark:text-gray-400">Toca el botón para descargar tu archivo {fileExtension}</p>
+            <h4 className="mb-2 text-lg font-medium text-gray-700 dark:text-gray-200">{t('file_ready_to_download')}</h4>
+            <p className="mb-6 text-sm text-gray-500 dark:text-gray-400">{t('tap_button_to_download', { extension: fileExtension })}</p>
             <a
               href={selectedFile.download_url}
               target="_blank"
@@ -22,7 +24,7 @@ export const DocumentModal = ({ selectedFile, isOpen, close }: IModalProps) => {
               className="inline-flex items-center rounded-lg bg-blue-600 px-6 py-3 font-medium text-white transition-colors hover:bg-blue-700 dark:bg-blue-500 dark:hover:bg-blue-600"
             >
               <Download className="mr-2 h-5 w-5" />
-              Descargar archivo
+              {t('download_file')}
             </a>
           </div>
         </div>
@@ -35,7 +37,7 @@ export const DocumentModal = ({ selectedFile, isOpen, close }: IModalProps) => {
           <iframe
             src={iframeUrl}
             className="flex h-full w-full overflow-hidden border-0 break-words"
-            title={`Vista previa de ${fileDisplayName}`}
+            title={t('preview_of', { name: fileDisplayName })}
             style={{
               minHeight: '500px',
               backgroundColor: 'white',
@@ -62,8 +64,8 @@ export const DocumentModal = ({ selectedFile, isOpen, close }: IModalProps) => {
       <div className="bg-background flex h-full w-full items-center justify-center">
         <div className="mx-auto max-w-sm p-6 text-center">
           <TriangleAlert className="mx-auto mb-4 h-16 w-16 text-yellow-500 dark:text-yellow-400" />
-          <h4 className="mb-2 text-lg font-medium text-gray-700 dark:text-gray-200">Vista previa no disponible</h4>
-          <p className="mb-6 text-sm text-gray-500 dark:text-gray-400">Este tipo de archivo (.{fileExtension}) no se puede previsualizar</p>
+          <h4 className="mb-2 text-lg font-medium text-gray-700 dark:text-gray-200">{t('preview_not_available')}</h4>
+          <p className="mb-6 text-sm text-gray-500 dark:text-gray-400">{t('file_type_not_previewable', { extension: fileExtension })}</p>
           <a
             href={selectedFile.download_url}
             target="_blank"
@@ -71,7 +73,7 @@ export const DocumentModal = ({ selectedFile, isOpen, close }: IModalProps) => {
             className="inline-flex items-center rounded-lg bg-blue-600 px-6 py-3 font-medium text-white transition-colors hover:bg-blue-700 dark:bg-blue-500 dark:hover:bg-blue-600"
           >
             <Download className="mr-2 h-5 w-5" />
-            Descargar archivo
+            {t('download_file')}
           </a>
         </div>
       </div>
@@ -90,7 +92,7 @@ export const DocumentModal = ({ selectedFile, isOpen, close }: IModalProps) => {
               <h3 className="text-xs leading-tight font-medium break-words text-gray-900 sm:text-sm" title={fileDisplayName}>
                 {fileDisplayName}
               </h3>
-              <p className="truncate text-xs text-gray-500">Archivo .{fileExtension}</p>
+              <p className="truncate text-xs text-gray-500">{t('file_extension_label', { extension: fileExtension })}</p>
             </div>
           </div>
 
@@ -100,10 +102,10 @@ export const DocumentModal = ({ selectedFile, isOpen, close }: IModalProps) => {
               target="_blank"
               rel="noopener noreferrer"
               className="hidden items-center rounded-md bg-blue-600 px-2 py-1.5 text-xs text-white transition-colors hover:bg-blue-700 sm:flex"
-              title="Descargar archivo"
+              title={t('download_file')}
             >
               <Download className="mr-1 h-3 w-3" />
-              <span>Descargar</span>
+              <span>{t('download')}</span>
             </a>
 
             <a
@@ -111,7 +113,7 @@ export const DocumentModal = ({ selectedFile, isOpen, close }: IModalProps) => {
               target="_blank"
               rel="noopener noreferrer"
               className="flex h-7 w-7 items-center justify-center rounded-md bg-blue-600 text-white transition-colors hover:bg-blue-700 sm:hidden"
-              title="Descargar archivo"
+              title={t('download_file')}
             >
               <Download className="h-3 w-3" />
             </a>
@@ -119,7 +121,7 @@ export const DocumentModal = ({ selectedFile, isOpen, close }: IModalProps) => {
             <button
               onClick={close}
               className="flex h-7 w-7 items-center justify-center rounded-md text-gray-500 transition-colors hover:bg-gray-100 hover:text-gray-700 sm:h-8 sm:w-8"
-              title="Cerrar"
+              title={t('close')}
             >
               <CircleX className="h-4 w-4" />
             </button>

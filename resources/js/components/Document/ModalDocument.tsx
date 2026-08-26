@@ -11,7 +11,7 @@ const ModalDocument = ({ isOpen, close, url, name, onClickApprove, onClickDeclin
   const { t } = useTranslation()
 
   return (
-    <Modal title={'Documento'} isOpen={isOpen} close={close}>
+    <Modal title={t('document')} isOpen={isOpen} close={close}>
       <div className="flex flex-col gap-2">
         <Typography variant={TypographyVariantEnum.H3}>{name}</Typography>
         <File url={url} />

@@ -1,13 +1,15 @@
 import Card from '@/components/Card/Card'
+import i18n from '@/i18n'
 import { AlertTriangle, ChevronRight, ClipboardCopy, FileWarning, Gauge, Home as HomeIcon, MapPin, RefreshCw } from 'lucide-react'
 import { FallbackProps } from 'react-error-boundary'
+import { useTranslation } from 'react-i18next'
 
 const getErrorInfo = (error: Error) => {
   const stack = error.stack || ''
   const stackLines = stack.split('\n').filter((line) => line.trim())
 
   // Extraer el archivo y línea donde ocurrió el error
-  const errorLocation = stackLines[1]?.trim() || 'Ubicación desconocida'
+  const errorLocation = stackLines[1]?.trim() || i18n.t('unknown_location')
   const fileMatch = errorLocation.match(/\(?(.*):(\d+):(\d+)\)?/)
 
   // Obtener las líneas del stack (excluyendo la primera que es el mensaje del error)
@@ -34,8 +36,8 @@ const getErrorInfo = (error: Error) => {
   }
 
   return {
-    name: error.name || 'Error',
-    message: error.message || 'Error desconocido',
+    name: error.name || i18n.t('error'),
+    message: error.message || i18n.t('unknown_error'),
     file: fileMatch ? fileMatch[1] : null,
     line: fileMatch ? fileMatch[2] : null,
     column: fileMatch ? fileMatch[3] : null,
@@ -52,13 +54,14 @@ const getErrorInfo = (error: Error) => {
 const copyToClipboard = async (text: string) => {
   try {
     await navigator.clipboard.writeText(text)
-    alert('Error copiado al portapapeles')
+    alert(i18n.t('error_copied_to_clipboard'))
   } catch (err) {
     console.error('Error al copiar:', err)
   }
 }
 
 export const ErrorFallback = ({ error }: FallbackProps) => {
+  const { t } = useTranslation()
   const errorInfo = getErrorInfo(error)
   const isDev = import.meta.env.DEV
 
@@ -86,8 +89,8 @@ ${errorInfo.fullStack}
               <AlertTriangle className="text-danger h-8 w-8" />
             </div>
             <div className="flex-1">
-              <h2 className="text-2xl font-bold text-[var(--text)]">¡Ups! Algo salió mal</h2>
-              <p className="mt-1 text-sm text-[var(--text)] opacity-70">La aplicación encontró un error inesperado</p>
+              <h2 className="text-2xl font-bold text-[var(--text)]">{t('error_title')}</h2>
+              <p className="mt-1 text-sm text-[var(--text)] opacity-70">{t('error_description')}</p>
             </div>
             <span className="badge bg-danger/90">{errorInfo.name}</span>
           </div>
@@ -100,7 +103,7 @@ ${errorInfo.fullStack}
             <div className="flex items-start gap-3">
               <FileWarning className="text-danger mt-0.5 h-6 w-6" />
               <div>
-                <h3 className="mb-1 font-semibold text-[var(--text)]">Mensaje del error</h3>
+                <h3 className="mb-1 font-semibold text-[var(--text)]">{t('error_message')}</h3>
                 <p className="text-danger/90 dark:text-danger/70 font-mono text-sm break-words">{errorInfo.message}</p>
               </div>
             </div>
@@ -112,13 +115,13 @@ ${errorInfo.fullStack}
               <div className="flex items-start gap-3">
                 <MapPin className="text-info mt-0.5 h-6 w-6" />
                 <div>
-                  <h3 className="mb-2 font-semibold text-[var(--text)]">Ubicación del error</h3>
+                  <h3 className="mb-2 font-semibold text-[var(--text)]">{t('error_location')}</h3>
                   <div className="space-y-1 text-sm">
                     <p>
-                      <span className="font-semibold">Archivo:</span> <span className="font-mono">{errorInfo.file}</span>
+                      <span className="font-semibold">{t('file')}:</span> <span className="font-mono">{errorInfo.file}</span>
                     </p>
                     <p>
-                      <span className="font-semibold">Línea:</span>{' '}
+                      <span className="font-semibold">{t('line')}:</span>{' '}
                       <span className="font-mono">
                         {errorInfo.line}:{errorInfo.column}
                       </span>
@@ -137,7 +140,7 @@ ${errorInfo.fullStack}
                   <details open className="panel group mb-3 bg-[var(--card)] !p-0 text-[var(--text)]">
                     <summary className="flex cursor-pointer items-center gap-2 bg-[var(--card)] p-4 font-semibold transition hover:bg-[var(--card)]/80">
                       <ChevronRight className="h-5 w-5 transition group-open:rotate-90" />
-                      Stack Trace (primeras {errorInfo.stackLines.length} líneas)
+                      {t('stack_trace_first_lines', { count: errorInfo.stackLines.length })}
                     </summary>
                     <div className="max-h-64 overflow-auto bg-[var(--card)] p-4">
                       {errorInfo.stackLines.length > 0 ? (
@@ -149,7 +152,7 @@ ${errorInfo.fullStack}
                           ))}
                         </pre>
                       ) : (
-                        <p className="text-sm opacity-70">No hay stack trace disponible</p>
+                        <p className="text-sm opacity-70">{t('no_stack_trace')}</p>
                       )}
                     </div>
                   </details>
@@ -157,7 +160,7 @@ ${errorInfo.fullStack}
                   <details className="panel group bg-[var(--card)] !p-0 text-[var(--text)]">
                     <summary className="flex cursor-pointer items-center gap-2 bg-[var(--card)] p-4 font-semibold transition hover:bg-[var(--card)]/80">
                       <ChevronRight className="h-5 w-5 transition group-open:rotate-90" />
-                      Stack Trace completo
+                      {t('full_stack_trace')}
                     </summary>
                     <div className="max-h-96 overflow-auto bg-[var(--card)] p-4">
                       <pre className="text-xs leading-relaxed break-words whitespace-pre-wrap text-gray-300">{errorInfo.fullStack}</pre>
@@ -166,7 +169,7 @@ ${errorInfo.fullStack}
                 </>
               ) : (
                 <div className="panel bg-[var(--card)] p-4">
-                  <p className="text-sm opacity-70">No hay stack trace disponible para este error</p>
+                  <p className="text-sm opacity-70">{t('no_stack_trace_for_error')}</p>
                 </div>
               )}
             </div>
@@ -178,16 +181,18 @@ ${errorInfo.fullStack}
               <div className="flex items-start gap-3">
                 <Gauge className="text-warning mt-0.5 h-6 w-6" />
                 <div>
-                  <h3 className="mb-2 font-semibold text-[var(--text)]">Uso de memoria</h3>
+                  <h3 className="mb-2 font-semibold text-[var(--text)]">{t('memory_usage')}</h3>
                   <div className="grid grid-cols-3 gap-2 text-sm">
                     <div>
-                      <span className="opacity-70">Usado:</span> <span className="font-mono">{errorInfo.browserInfo.memory.usedJSHeapSize}</span>
+                      <span className="opacity-70">{t('used')}:</span>{' '}
+                      <span className="font-mono">{errorInfo.browserInfo.memory.usedJSHeapSize}</span>
                     </div>
                     <div>
-                      <span className="opacity-70">Total:</span> <span className="font-mono">{errorInfo.browserInfo.memory.totalJSHeapSize}</span>
+                      <span className="opacity-70">{t('total')}:</span>{' '}
+                      <span className="font-mono">{errorInfo.browserInfo.memory.totalJSHeapSize}</span>
                     </div>
                     <div>
-                      <span className="opacity-70">Límite:</span> <span className="font-mono">{errorInfo.browserInfo.memory.limit}</span>
+                      <span className="opacity-70">{t('limit')}:</span> <span className="font-mono">{errorInfo.browserInfo.memory.limit}</span>
                     </div>
                   </div>
                 </div>
@@ -198,19 +203,19 @@ ${errorInfo.fullStack}
           {/* Additional Info */}
           <div className="mb-6 grid gap-4 text-[var(--text)] sm:grid-cols-2 lg:grid-cols-4">
             <div className="panel p-3">
-              <p className="text-xs font-semibold uppercase opacity-60">Timestamp</p>
+              <p className="text-xs font-semibold uppercase opacity-60">{t('timestamp')}</p>
               <p className="mt-1 font-mono text-sm">{errorInfo.timestamp}</p>
             </div>
             <div className="panel p-3">
-              <p className="text-xs font-semibold uppercase opacity-60">URL Actual</p>
+              <p className="text-xs font-semibold uppercase opacity-60">{t('current_url')}</p>
               <p className="mt-1 truncate font-mono text-sm">{window.location.pathname}</p>
             </div>
             <div className="panel p-3">
-              <p className="text-xs font-semibold uppercase opacity-60">Viewport</p>
+              <p className="text-xs font-semibold uppercase opacity-60">{t('viewport')}</p>
               <p className="mt-1 font-mono text-sm">{errorInfo.browserInfo.viewport}</p>
             </div>
             <div className="panel p-3">
-              <p className="text-xs font-semibold uppercase opacity-60">Plataforma</p>
+              <p className="text-xs font-semibold uppercase opacity-60">{t('platform')}</p>
               <p className="mt-1 font-mono text-sm">{errorInfo.browserInfo.platform}</p>
             </div>
           </div>
@@ -219,16 +224,16 @@ ${errorInfo.fullStack}
           <div className="flex flex-wrap gap-3">
             <button onClick={() => window.location.reload()} className="btn btn-primary gap-2 shadow-md">
               <RefreshCw className="h-5 w-5" />
-              Recargar página
+              {t('reload_page')}
             </button>
             <button onClick={() => (window.location.href = '/')} className="btn btn-secondary gap-2 shadow-md">
               <HomeIcon className="h-5 w-5" />
-              Ir al inicio
+              {t('go_home')}
             </button>
             {isDev && (
               <button onClick={() => copyToClipboard(errorReport)} className="btn btn-outline-dark gap-2 shadow-md">
                 <ClipboardCopy className="h-5 w-5" />
-                Copiar reporte
+                {t('copy_report')}
               </button>
             )}
           </div>
@@ -236,9 +241,7 @@ ${errorInfo.fullStack}
 
         {/* Footer */}
         <div className="dark:border-white-dark/10 border-t p-4">
-          <p className="text-center text-sm text-[var(--text)] opacity-70">
-            {isDev ? '🔧 Modo desarrollo - Información detallada visible' : 'Si el problema persiste, contacta al soporte técnico'}
-          </p>
+          <p className="text-center text-sm text-[var(--text)] opacity-70">{isDev ? t('dev_mode_notice') : t('support_notice')}</p>
         </div>
       </Card>
     </div>
