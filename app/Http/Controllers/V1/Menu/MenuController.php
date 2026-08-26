@@ -9,6 +9,7 @@ use App\Data\Menu\MenuUpdateData;
 use App\Http\Controllers\Controller;
 use App\Logics\Menu\MenuDeleteLogic;
 use App\Logics\Menu\MenuIndexLogic;
+use App\Logics\Menu\MenuShowAllLogic;
 use App\Logics\Menu\MenuShowLogic;
 use App\Logics\Menu\MenuStoreLogic;
 use App\Logics\Menu\MenuUpdateLogic;
@@ -23,6 +24,11 @@ class MenuController extends Controller
     }
 
     public function show(MenuShowData $data, MenuShowLogic $logic): JsonResponse
+    {
+        return $logic->run($data);
+    }
+
+    public function showAll(MenuShowData $data, MenuShowAllLogic $logic): JsonResponse
     {
         return $logic->run($data);
     }

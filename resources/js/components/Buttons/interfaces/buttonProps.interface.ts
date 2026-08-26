@@ -1,8 +1,8 @@
 import { ButtonTypeEnum } from '@/components/Buttons/enums/buttonType.enum'
 import { ButtonVariantEnum } from '@/components/Buttons/enums/buttonVariant.enum'
 import { SizeEnum } from '@/enums/SizeEnum'
+import { IRoutes } from '@/router/routes.interface'
 import React from 'react'
-import { IRoutes } from "@/routes/routes.interface";
 
 export interface IButtonProps {
   type?: ButtonTypeEnum

@@ -61,6 +61,11 @@ class ActionSeeder extends Seeder
                 'description' => 'Update menus',
             ],
             [
+                'id' => '531788d5-e47f-49d2-a39a-8e540ffed904',
+                'name' => 'auth.menus.show_all',
+                'description' => 'Show all menu items regardless of role',
+            ],
+            [
                 'id' => 'b435dd36-e5a6-48b7-8a86-cf7c8d3ba019',
                 'name' => 'auth.menus.destroy',
                 'description' => 'Delete menus',

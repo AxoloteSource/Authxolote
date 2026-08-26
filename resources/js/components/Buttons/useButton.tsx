@@ -1,9 +1,9 @@
+import { SizeEnum } from '@/enums/SizeEnum'
 import { useClass } from '@/hooks/useClass'
 import { Link } from 'react-router-dom'
 import { ButtonTypeEnum } from './enums/buttonType.enum'
 import { ButtonVariantEnum } from './enums/buttonVariant.enum'
 import { IUseButtonProps } from './interfaces/userButtonProps.interface'
-import { SizeEnum } from '@/enums/SizeEnum'
 
 export const buttonClasses = {
   'round-alternate':

@@ -13,6 +13,9 @@ Route::controller(MenuController::class)->group(function () {
     Route::get('{slug}', 'show')
         ->middleware('isAllow:auth.menus.show');
 
+    Route::get('{slug}/all-items', 'showAll')
+        ->middleware('isAllow:auth.menus.show_all');
+
     Route::put('{id}', 'update')
         ->middleware('isAllow:auth.menus.update');
 

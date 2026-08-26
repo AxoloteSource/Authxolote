@@ -42,6 +42,7 @@ class ActionRoleSeeder extends Seeder
             'auth.menus.index',
             'auth.menus.store',
             'auth.menus.show',
+            'auth.menus.show_all',
             'auth.menus.update',
             'auth.menus.destroy',
             'auth.menu_items.index',

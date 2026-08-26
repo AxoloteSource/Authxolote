@@ -4,9 +4,12 @@ import { MenuV2Item } from './MenuV2Item'
 
 interface IMenuV2SubMenuProps {
   items: IMenuItem[]
+  editMode?: boolean
+  onEdit?: (id: string) => void
+  onDelete?: (id: string) => void
 }
 
-export const MenuV2SubMenu = ({ items }: IMenuV2SubMenuProps) => {
+export const MenuV2SubMenu = ({ items, editMode = false, onEdit, onDelete }: IMenuV2SubMenuProps) => {
   if (items.length === 0) {
     return null
   }
@@ -15,9 +18,9 @@ export const MenuV2SubMenu = ({ items }: IMenuV2SubMenuProps) => {
     <ul className="sub-menu text-gray-500">
       {items.map((item) =>
         item.type === 'header' || (item.children?.length ?? 0) > 0 ? (
-          <MenuV2Header key={item.id} item={item} />
+          <MenuV2Header key={item.id} item={item} editMode={editMode} onEdit={onEdit} onDelete={onDelete} />
         ) : (
-          <MenuV2Item key={item.id} item={item} />
+          <MenuV2Item key={item.id} item={item} editMode={editMode} onEdit={onEdit} onDelete={onDelete} />
         ),
       )}
     </ul>
