@@ -1,0 +1,4 @@
+### Applications - Show
+GET {{authUrl}}api/v1/applications/{{applicationSlug}}
+Accept: application/json
+Authorization: Bearer {{token}}

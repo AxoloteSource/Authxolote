@@ -1,0 +1,17 @@
+### Menu Items - Store (header)
+POST {{authUrl}}api/v1/menu-items
+Accept: application/json
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+{
+  "menu_id": "{{menuId}}",
+  "parent_id": null,
+  "type": "header",
+  "name": "Catálogos",
+  "path": null,
+  "route": null,
+  "icon": "Database",
+  "sort_order": 2,
+  "active": true
+}

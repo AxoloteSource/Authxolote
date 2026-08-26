@@ -1,0 +1,16 @@
+### Menu Items - Update
+PUT {{authUrl}}api/v1/menu-items/{{menuItemId}}
+Accept: application/json
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+{
+  "menu_id": "{{menuId}}",
+  "parent_id": null,
+  "type": "link",
+  "name": "Inicio",
+  "path": "/home",
+  "icon": "House",
+  "sort_order": 1,
+  "active": true
+}

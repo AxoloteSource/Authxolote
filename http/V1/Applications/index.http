@@ -1,0 +1,4 @@
+### Applications - Index
+GET {{authUrl}}api/v1/applications?page=1&limit=10
+Accept: application/json
+Authorization: Bearer {{token}}

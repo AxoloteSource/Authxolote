@@ -1,0 +1,14 @@
+### Menus - Store
+POST {{authUrl}}api/v1/menus
+Accept: application/json
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+{
+  "application_id": "{{applicationId}}",
+  "name": "Sidebar",
+  "slug": "sidebar",
+  "icon": "Menu",
+  "sort_order": 0,
+  "active": true
+}

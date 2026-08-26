@@ -1,0 +1,4 @@
+### Menus - Show
+GET {{authUrl}}api/v1/menus/{{menuSlug}}
+Accept: application/json
+Authorization: Bearer {{token}}

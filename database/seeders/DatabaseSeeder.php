@@ -16,6 +16,8 @@ class DatabaseSeeder extends Seeder
             UserListSeeder::class,
             SettingValueTypeSeeder::class,
             SettingSeeder::class,
+            ApplicationSeeder::class,
+            MenuSeeder::class,
         ]);
     }
 }

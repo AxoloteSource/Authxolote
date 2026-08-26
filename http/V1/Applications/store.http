@@ -1,0 +1,12 @@
+### Applications - Store
+POST {{authUrl}}api/v1/applications
+Accept: application/json
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+{
+  "name": "Backoffice",
+  "slug": "backoffice",
+  "description": "Panel de administración del Backoffice",
+  "active": true
+}

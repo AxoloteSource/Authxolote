@@ -1,0 +1,4 @@
+### Menus - Index
+GET {{authUrl}}api/v1/menus?page=1&limit=10
+Accept: application/json
+Authorization: Bearer {{token}}

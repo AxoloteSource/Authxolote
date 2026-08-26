@@ -1,0 +1,4 @@
+### Applications - Destroy
+DELETE {{authUrl}}api/v1/applications/{{applicationId}}
+Accept: application/json
+Authorization: Bearer {{token}}

@@ -1,0 +1,4 @@
+### Menu Items - Destroy
+DELETE {{authUrl}}api/v1/menu-items/{{menuItemId}}
+Accept: application/json
+Authorization: Bearer {{token}}

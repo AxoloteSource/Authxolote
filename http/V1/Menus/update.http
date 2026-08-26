@@ -1,0 +1,14 @@
+### Menus - Update
+PUT {{authUrl}}api/v1/menus/{{menuId}}
+Accept: application/json
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+{
+  "application_id": "{{applicationId}}",
+  "name": "Sidebar",
+  "slug": "sidebar",
+  "icon": "Menu",
+  "sort_order": 0,
+  "active": true
+}
