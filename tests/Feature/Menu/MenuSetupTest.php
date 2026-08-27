@@ -450,4 +450,35 @@ class MenuSetupTest extends TestCase
 
         $this->assertCount(1, $home->roles);
     }
+
+    public function test_it_rejects_menu_item_slug_when_already_registered_for_another_menu(): void
+    {
+        $this->withExceptionHandling();
+        $this->loginRoot();
+
+        $application = Application::factory()->create();
+        $menu = Menu::factory()->create(['application_id' => $application->id]);
+        MenuItem::factory()->create([
+            'menu_id' => $menu->id,
+            'slug' => 'home',
+            'parent_id' => null,
+        ]);
+
+        $response = $this->postJson('/api/v1/menus/setup', [
+            'name' => 'Another Menu',
+            'application' => [
+                'name' => 'Another App',
+                'slug' => 'another-app',
+            ],
+            'menu_items' => [
+                'home' => [
+                    'path' => '/',
+                    'icon' => 'House',
+                ],
+            ],
+        ]);
+
+        $response->assertStatus(422);
+        $response->assertJsonPath('message', __('The menu item slug ":slug" is already registered for another menu or parent.', ['slug' => 'home']));
+    }
 }

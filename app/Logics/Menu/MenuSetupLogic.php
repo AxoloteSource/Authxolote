@@ -116,6 +116,20 @@ class MenuSetupLogic extends StoreLogic
             $name = $item['name'] ?? $key;
             $type = $hasChildren ? MenuItemType::Header : MenuItemType::Link;
 
+            $existingBySlug = MenuItem::where('slug', $key)->first();
+
+            logger('$existingBySlug', [$existingBySlug]);
+
+            if ($existingBySlug && ($existingBySlug->menu_id !== $menu->id || $existingBySlug->parent_id !== $parentId)) {
+                logger('entro aquí');
+                logger('debug', [$existingBySlug, $parentId, $existingBySlug->menu_id, $menu->id, $existingBySlug->parent_id, $parentId]);
+
+
+                $this->error(__('The menu item slug ":slug" is already registered for another menu or parent.', ['slug' => $key]));
+
+                return;
+            }
+
             $existing = MenuItem::findBySlugAndMenu($key, $menu->id, $parentId);
 
             if ($existing) {
