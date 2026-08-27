@@ -8,6 +8,7 @@ use App\Models\MenuItem;
 use AxoloteSource\Logics\Logics\UpdateLogic;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\JsonResponse;
+use Illuminate\Support\Facades\DB;
 use Spatie\LaravelData\Data;
 
 class MenuItemUpdateLogic extends UpdateLogic
@@ -28,7 +29,7 @@ class MenuItemUpdateLogic extends UpdateLogic
 
     protected function before(): bool
     {
-        return $this->validateType();
+        return $this->validateType() && $this->validateSlug();
     }
 
     protected function withResource(): MenuItemShowResource
@@ -48,6 +49,20 @@ class MenuItemUpdateLogic extends UpdateLogic
 
         if (blank($this->input->route) && blank($this->input->path)) {
             return $this->error('Link items must have a route or a path.');
+        }
+
+        return true;
+    }
+
+    private function validateSlug(): bool
+    {
+        $slugExists = DB::table('menu_items')
+            ->where('slug', $this->input->slug)
+            ->where('id', '!=', $this->input->id)
+            ->exists();
+
+        if ($slugExists) {
+            return $this->error('The slug has already been taken.');
         }
 
         return true;

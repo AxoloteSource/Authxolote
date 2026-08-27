@@ -1,5 +1,6 @@
 import { FormikProps } from 'formik/dist/types'
-import { MultiValue, SingleValue } from 'react-select'
+import { ComponentType, ReactNode } from 'react'
+import { MultiValue, OptionProps, SingleValue, SingleValueProps } from 'react-select'
 import { IOptions } from './IOptions'
 
 export interface ISelect<T> {
@@ -17,4 +18,7 @@ export interface ISelect<T> {
   filterOption?: boolean | ((option: IOptions, inputValue: string) => boolean)
   isClearable?: boolean
   isLoading?: boolean
+  OptionComponent?: ComponentType<OptionProps<IOptions, false>>
+  SingleValueComponent?: ComponentType<SingleValueProps<IOptions, false>>
+  noOptionsMessage?: string
 }
