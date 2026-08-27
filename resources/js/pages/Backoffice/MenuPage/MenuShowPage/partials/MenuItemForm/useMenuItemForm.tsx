@@ -59,10 +59,10 @@ export const useMenuItemForm = ({ selectedMenuItem, onSuccess, menuId }: IUseMen
       .oneOf(['link', 'header'])
       .test('check-path-or-route', t('menu_item_path_or_route_error'), function (value) {
         if (value === 'header') {
-          return !String(this.parent.route).trim() && !String(this.parent.path).trim()
+          return true
         }
 
-        return Boolean(String(this.parent.route).trim() || String(this.parent.path).trim())
+        return Boolean(String(this.parent.route ?? '').trim() || String(this.parent.path ?? '').trim())
       })
   })
 
