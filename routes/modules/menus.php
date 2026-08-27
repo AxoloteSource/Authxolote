@@ -10,6 +10,9 @@ Route::controller(MenuController::class)->group(function () {
     Route::post('/', 'store')
         ->middleware('isAllow:auth.menus.store');
 
+    Route::post('/setup', 'setup')
+        ->middleware('isAllow:auth.menus.store');
+
     Route::get('{slug}', 'show')
         ->middleware('isAllow:auth.menus.show');
 

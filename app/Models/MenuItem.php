@@ -88,4 +88,12 @@ class MenuItem extends Model
     {
         return $query->orderBy('sort_order');
     }
+
+    public static function findBySlugAndMenu(string $slug, string $menuId, ?string $parentId = null): ?static
+    {
+        return static::where('slug', $slug)
+            ->where('menu_id', $menuId)
+            ->where('parent_id', $parentId)
+            ->first();
+    }
 }

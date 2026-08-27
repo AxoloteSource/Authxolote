@@ -36,4 +36,9 @@ class Menu extends Model
     {
         return $this->hasMany(MenuItem::class);
     }
+
+    public static function findBySlugAndApplication(string $slug): ?static
+    {
+        return static::where('slug', $slug)->first();
+    }
 }

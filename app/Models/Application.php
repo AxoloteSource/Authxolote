@@ -27,4 +27,9 @@ class Application extends Model
     {
         return $this->hasMany(Menu::class);
     }
+
+    public static function findBySlug(string $slug): ?static
+    {
+        return static::where('slug', $slug)->first();
+    }
 }
