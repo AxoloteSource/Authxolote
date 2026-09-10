@@ -820,12 +820,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/AxoloteSource/laravel-logics.git",
-                "reference": "532af34480b27e22d4f7d4ac348328d8c09400df"
+                "reference": "11dac1d483ce13a8b4bb12ce94518ae8f1493cad"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/AxoloteSource/laravel-logics/zipball/532af34480b27e22d4f7d4ac348328d8c09400df",
-                "reference": "532af34480b27e22d4f7d4ac348328d8c09400df",
+                "url": "https://api.github.com/repos/AxoloteSource/laravel-logics/zipball/11dac1d483ce13a8b4bb12ce94518ae8f1493cad",
+                "reference": "11dac1d483ce13a8b4bb12ce94518ae8f1493cad",
                 "shasum": ""
             },
             "require": {
@@ -867,7 +867,7 @@
                 "issues": "https://github.com/AxoloteSource/laravel-logics/issues",
                 "source": "https://github.com/AxoloteSource/laravel-logics/tree/main"
             },
-            "time": "2026-07-07T01:48:25+00:00"
+            "time": "2026-09-09T16:39:46+00:00"
         },
         {
             "name": "brick/math",

@@ -15,6 +15,12 @@ class RoleIndexLogic extends IndexLogic
         parent::__construct($role);
     }
 
+    protected array $allowOrderByFields = [
+        'name',
+        'description',
+        'key',
+    ];
+
     public function run(IndexData|Data $input): JsonResponse
     {
         return parent::logic($input);
